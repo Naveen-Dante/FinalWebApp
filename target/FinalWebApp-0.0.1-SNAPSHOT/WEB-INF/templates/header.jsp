@@ -20,7 +20,7 @@
 				<li><a href="command?name=books">Books</a></li>
 				<li><a href="command?name=books">Favourites</a></li>
 			</ul>
-			<form class="navbar-form navbar-left" role="search" action="/search">
+			<form class="navbar-form navbar-left" role="search" action="/command?name=search">
 				<div class="form-group">
 					<input type="text" class="form-control" name="searchText"
 						placeholder="Search">
@@ -33,7 +33,7 @@
 					<li><a class="clickable" id="loginBtn"><b>Login</b> </a></li>
 				</c:if>
 				<c:if test="${user!= null }">
-					<li>${user.firstName}</li>
+					<li><a href="command?name=profile">${user.firstName}</a></li>
 					<li><a href="command?name=logout">LogOut</a></li>
 				</c:if>
 				<li><a href="command?name=translate&lang=en_EN">English</a></li>
@@ -55,17 +55,17 @@
 				</h4>
 			</div>
 			<div class="modal-body" style="padding: 30px 50px;">
-				<form action="user" role="form" method="post">
+				<form action="command?name=login" role="form" method="post">
 					<div class="form-group">
 						<label for="usrname"><span
-							class="glyphicon glyphicon-user"></span> Username</label> <input
-							type="text" class="form-control" id="usrname"
+							class="glyphicon glyphicon-user"></span> Username</label> 
+						<input type="text" class="form-control" name="username"
 							placeholder="Enter User Name" required>
 					</div>
 					<div class="form-group">
 						<label for="psw"><span
 							class="glyphicon glyphicon-eye-open"></span> Password</label> <input
-							type="password" class="form-control" id="psw"
+							type="password" class="form-control" name="password"
 							placeholder="Enter password" required>
 					</div>
 					<button type="submit" class="btn btn-success btn-block">

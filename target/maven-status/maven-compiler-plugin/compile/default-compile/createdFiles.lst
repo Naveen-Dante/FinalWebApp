@@ -1,6 +1,0 @@
-com\epam\service\ConnectionPoolService.class
-com\epam\service\impl\ConnectionPoolServiceImpl.class
-com\epam\listener\MyContextListener.class
-com\epam\dao\pool\ConnectionPool.class
-com\epam\dao\pool\exception\PoolException.class
-com\epam\dao\IConnectionPool.class

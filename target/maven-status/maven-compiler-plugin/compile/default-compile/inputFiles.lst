@@ -1,17 +1,18 @@
-D:\Git Data\FinalWebApp\src\main\java\com\epam\command\Command.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\controller\SimpleWebAppController.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\dao\impl\LoginDAOImpl.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\domain\User.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\service\ConnectionPoolService.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\service\impl\LoginServiceImpl.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\dao\IConnectionPool.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\service\impl\ConnectionPoolServiceImpl.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\dao\LoginDAO.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\dao\exception\DAOException.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\command\CommandProvider.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\dao\pool\exception\PoolException.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\listener\MyContextListener.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\command\impl\LoginCommand.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\service\exception\ServiceException.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\dao\pool\ConnectionPool.java
-D:\Git Data\FinalWebApp\src\main\java\com\epam\service\LoginService.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\service\exception\ServiceException.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\command\impl\LogoutCommand.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\dao\LoginDAO.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\dao\IConnectionPool.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\listener\MyContextListener.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\command\CommandProvider.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\dao\pool\ConnectionPool.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\controller\SimpleWebAppController.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\dao\impl\LoginDAOImpl.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\command\Command.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\service\ConnectionPoolService.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\service\impl\LoginServiceImpl.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\dao\exception\DAOException.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\service\LoginService.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\command\impl\LoginCommand.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\service\impl\ConnectionPoolServiceImpl.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\dao\pool\exception\PoolException.java
+D:\Heroku\FinalWebApp\src\main\java\com\epam\domain\User.java

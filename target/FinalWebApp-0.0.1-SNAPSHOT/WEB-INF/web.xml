@@ -15,8 +15,6 @@
   <servlet-mapping>
     <servlet-name>controller</servlet-name>
     <url-pattern>/command</url-pattern>
-    <url-pattern>/search</url-pattern>
-    <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <listener>
     <listener-class>com.epam.listener.MyContextListener</listener-class>
