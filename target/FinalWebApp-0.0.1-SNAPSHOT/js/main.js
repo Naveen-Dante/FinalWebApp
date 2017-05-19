@@ -1,0 +1,9 @@
+$(document).ready(function(){
+    $("#loginBtn").click(function(){
+        $("#login").modal();
+    });
+});
+$(document).on("click","#signupBtn",function(){
+   $('#login').modal('hide');
+    $('#signup').modal('show');
+});

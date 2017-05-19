@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>FinalWebApp</display-name>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <display-name>controller</display-name>
+    <servlet-name>controller</servlet-name>
+    <servlet-class>com.epam.controller.SimpleWebAppController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>controller</servlet-name>
+    <url-pattern>/command</url-pattern>
+  </servlet-mapping>
+  <listener>
+    <listener-class>com.epam.listener.MyContextListener</listener-class>
+  </listener>
+</web-app>
