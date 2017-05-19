@@ -55,7 +55,6 @@ public class LoginCommand implements Command{
 					errorMsg = "Invalid UserName or Password!";
 					request.setAttribute(ERROR_MESSAGE, errorMsg);
 					request.setAttribute(ERROR, true);
-					
 					request.getRequestDispatcher("/").forward(request, response);
 				}
 				else{
