@@ -21,7 +21,7 @@ public class ConnectionPool implements IConnectionPool {
 	private static final String DB_URI = "DB_URI";
 	private static final Logger LOGGER = Logger.getLogger(ConnectionPool.class);
 	private static final String DB_DRIVER_CLASS = "DB_DRIVER_CLASS";
-	private static final ResourceBundle resource = ResourceBundle.getBundle(BASENAME, Locale.US);
+	private static final ResourceBundle resource = ResourceBundle.getBundle(BASENAME);
 	private static final int MAXPOOLSIZE = 2;
 
 	private static BlockingQueue<Connection> idleQueue;
