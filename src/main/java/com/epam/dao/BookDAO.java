@@ -11,7 +11,7 @@ public interface BookDAO {
 
 	List<Book> getBooks(String username, String language) throws DAOException;
 
-	List<Book> searchBooks(String searchText, String userName, String search, String booklanguage, String language) throws DAOException;
+	List<Book> searchBooks(String searchText, String userName) throws DAOException;
 
 	BookInfo searchBookInfo(int bookId, String language) throws DAOException;
 	

@@ -22,6 +22,7 @@ import com.epam.service.impl.LoginServiceImpl;
 public class LoginCommand implements Command{
 
 
+	private static final String LANGUAGE = "language";
 	private static final String BOOKS = "books";
 	//private static final String WELCOME_PAGE = "WEB-INF/welcome.jsp";
 	private static final String ADMIN_PAGE = "WEB-INF/admin.jsp";
@@ -46,7 +47,7 @@ public class LoginCommand implements Command{
 		String userName = request.getParameter(USERNAME);
 		String password = request.getParameter(PASSWORD);
 		String errorMsg = null;
-		String language = (String) session.getAttribute("language");
+		String language = (String) session.getAttribute(LANGUAGE);
 		System.out.println(language);
 		if(userName == null || password == null){
 			response.sendRedirect("index.jsp");
@@ -62,10 +63,10 @@ public class LoginCommand implements Command{
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 				else{
-					//List<Book> books = bookService.getAllBooks(language);
-					//if(books != null){ 
-					//	session.setAttribute(BOOKS, books);
-					//}
+					List<Book> books = bookService.getAllBooks(language);
+					if(books != null){ 
+						session.setAttribute(BOOKS, books);
+					}
 					session.setAttribute(USER, user);
 					session.setAttribute(IS_LOGGED_IN, true);
 					if(user.isAdmin()){

@@ -40,10 +40,10 @@ public class BookServiceImpl implements BookService{
 		return books;
 	}
 
-	public List<Book> searchBook(String searchText, String userName, String search, String booklanguage, String language) throws ServiceException {
+	public List<Book> searchBook(String searchText, String language) throws ServiceException {
 		List<Book> books;
 		try{
-			books = dao.searchBooks(searchText, userName,search,booklanguage,language);
+			books = dao.searchBooks(searchText, language);
 		}catch (DAOException e) {
 			throw new ServiceException("Unable to fetch Books..",e);
 		}

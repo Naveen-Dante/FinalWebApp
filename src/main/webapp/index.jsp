@@ -2,13 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<c:set var="language"
+	value="${not empty param.language ? param.language : not empty language ? language : 'en_US'}"
+	scope="session" />
 <fmt:setLocale value="${language }" scope="session" />
 <fmt:setBundle basename="resource_bundle/locale" var="bundle"
 	scope="session" />
 <fmt:message key="locale.welcome" var="welcome" bundle="${bundle }" />
 
 <!DOCTYPE HTML>
-<html>
+<html lang=${language }>
 <head>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -24,23 +27,37 @@
 </head>
 <body>
 	<div class="main">
-	<jsp:include page="./WEB-INF/templates/header.jsp" />
-	<c:if test="${error == true }">
-		<div class="alert alert-danger alert-dismissable fade in">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
-			<strong>ERROR!</strong> <span>"${error_message }"</span>
-		</div>
-	</c:if>
-	<c:if test="${success_message != null }">
-		<div class="alert alert-success alert-dismissable fade in">
-			<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
-			<strong>Success!</strong> <span>"${success_message }"</span>
-		</div>
-	</c:if>
-	<%-- <h1>${welcome}</h1>
+		<jsp:include page="./WEB-INF/templates/header.jsp" />
+		<c:if test="${error == true }">
+			<div class="alert alert-danger alert-dismissable fade in">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+				<strong>ERROR!</strong> <span>"${error_message }"</span>
+			</div>
+		</c:if>
+		<c:if test="${success_message != null }">
+			<div class="alert alert-success alert-dismissable fade in">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
+				<strong>Success!</strong> <span>"${success_message }"</span>
+			</div>
+		</c:if>
+		<c:if test="${books != null}">
+			<jsp:include page="./WEB-INF/templates/books.jsp" />
+		</c:if>
+		<%-- <h1>${welcome}</h1>
 	<p>${pageContext.request.queryString }</p>
 	<p></p>
 	<h3>${pageContext.request.requestURL}</h3> --%>
-</div>
+	</div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		if ($('#books_table').length < 1) {
+			$.get('command?name=books', function() {
+				if ($('#books_table').length < 1) {
+					window.location.reload();
+				}
+			});
+		}
+	})
+</script>
 </html>

@@ -15,9 +15,8 @@ import com.epam.command.CommandProvider;
  * Servlet implementation class SimpleWebAppController
  */
 public class SimpleWebAppController extends HttpServlet {
-	private static final String REGEX = "=";
 
-	private static final String BOOK_COMMAND = "book";
+	private static final String NAME = "name";
 
 	private static final long serialVersionUID = 1L;
 	
@@ -40,8 +39,9 @@ public class SimpleWebAppController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println(request.getParameter("name"));
-		PROVIDER.getCommand(request.getParameter("name")).execute(request, response);
+		String parameter = request.getParameter(NAME);
+		System.out.println(parameter);
+		PROVIDER.getCommand(parameter).execute(request, response);
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class SimpleWebAppController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println(request.getParameter("name"));
-		PROVIDER.getCommand(request.getParameter("name")).execute(request, response);
+		System.out.println(request.getParameter(NAME));
+		PROVIDER.getCommand(request.getParameter(NAME)).execute(request, response);
 	}
 
 }

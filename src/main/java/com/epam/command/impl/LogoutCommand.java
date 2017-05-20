@@ -14,7 +14,8 @@ public class LogoutCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		session.invalidate();
+		session.removeAttribute("user");
+		session.removeAttribute("isLoggedIn");
 		response.sendRedirect("index.jsp");
 	}
 

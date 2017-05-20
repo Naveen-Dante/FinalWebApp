@@ -1,4 +1,20 @@
 
+$(document).on("click","#engBtn",function(){
+	if($('html').attr('lang') != 'en_US'){
+		$.get('command?name=changelanguage&lang=en_US',function(){
+			window.location.reload;
+		});
+	}
+});
+
+$(document).on("click","#espBtn",function(){
+	if($('html').attr('lang') != 'es_ES'){
+		$.get('command?name=changelanguage&lang=en_US',function(){
+			window.location.reload;
+		});
+	}
+});
+
 $(document).on("click","#signupBtn",function(){
 	closeNav();
 	$('#login').modal('hide');
@@ -14,7 +30,7 @@ $(document).on("click","#loginBtn",function(){
 $(document).on("click","#favsBtn",function(){
 	closeNav();
 	   if($('#isLoggedIn').length){
-		   $.get('command?name=books',function(){	   
+		   $.get('command?name=favourites',function(){	   
 			   
 		   });
 	   }

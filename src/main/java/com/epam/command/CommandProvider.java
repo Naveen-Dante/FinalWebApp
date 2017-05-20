@@ -3,9 +3,12 @@ package com.epam.command;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.epam.command.impl.BookCommand;
 import com.epam.command.impl.LoginCommand;
 import com.epam.command.impl.LogoutCommand;
+import com.epam.command.impl.SearchCommand;
 import com.epam.command.impl.user.DisplayBooksCommand;
+import com.epam.command.impl.user.FavouritesCommand;
 import com.epam.command.impl.user.NewUserCommand;
 
 public class CommandProvider {
@@ -17,12 +20,16 @@ public class CommandProvider {
 		commandMap.put("logout", new LogoutCommand());
 		commandMap.put("new", new NewUserCommand());
 		commandMap.put("books", new DisplayBooksCommand());
+		commandMap.put("book", new BookCommand());
+		commandMap.put("search", new SearchCommand());
+		//commandMap.put(null, new DisplayBooksCommand());
+		commandMap.put("favourites", new FavouritesCommand());
 		/*commandMap.put("get", new PageLoadCommand());
 		commandMap.put("login", new LoginCommand());
 		
 		
-		commandMap.put("search", new SearchCommand());
-		commandMap.put("book", new BookCommand());
+		
+		
 		*/
 	}
 	

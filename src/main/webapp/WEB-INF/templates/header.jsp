@@ -16,6 +16,7 @@
 <fmt:message key="locale.last" var="last" bundle="${bundle }" />
 <fmt:message key="locale.phone" var="phone" bundle="${bundle }" />
 <fmt:message key="locale.favs" var="favs" bundle="${bundle }" />
+<fmt:message key="locale.cancel" var="cancel" bundle="${bundle }" />
 
 
 <jsp:include page="./sidebar.jsp"></jsp:include>
@@ -38,8 +39,9 @@
 				<li><a class="clickable" id="favsBtn">${favs }</a></li>
 			</ul>
 			<form class="navbar-form navbar-left" role="search"
-				action="/command?name=search">
+				action="command">
 				<div class="input-group">
+					<input type="hidden" name="name" value="search">
 					<input type="text" class="form-control" name="searchText"
 						placeholder="${search }" required>
 					<div class="input-group-btn">
@@ -49,6 +51,7 @@
 					</div>
 				</div>
 			</form>
+			<input type="hidden" id="language" value=${language }>
 			<ul class="nav navbar-nav navbar-right">
 				<c:if test="${user == null }">
 					<li><a class="clickable" id="signupBtn"><b>${signup }</b></a></li>
@@ -58,8 +61,8 @@
 					<li><a href="command?name=profile" id="isLoggedIn">${user.firstName}</a></li>
 					<li><a href="command?name=logout">${logout }</a></li>
 				</c:if>
-				<li><a href="command?name=translate&lang=en_EN">English</a></li>
-				<li><a href="command?name=translate&lang=es_ES">Espanol</a></li>
+				<li><a class="clickable" id="engBtn">English</a></li>
+				<li><a class="clickable" id="espBtn">Espanol</a></li>
 			</ul>
 		</div>
 	</div>

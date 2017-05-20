@@ -16,24 +16,23 @@ import com.epam.service.BookService;
 import com.epam.service.exception.ServiceException;
 import com.epam.service.impl.BookServiceImpl;
 
-public class DisplayBooksCommand implements Command {
+public class FavouritesCommand implements Command {
 
 	private static final String LANGUAGE = "language";
 	private static BookService bookService;
 	private static final Logger LOGGER = Logger.getLogger(DisplayBooksCommand.class);
 	private static final String BOOKS = "books";
 
-	public DisplayBooksCommand() {
+	public FavouritesCommand() {
 		bookService = BookServiceImpl.getInstance();
 	}
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("in Books Command");
 		List<Book> books;
+		request.setAttribute("areFavs", true);
 		HttpSession session = request.getSession(true);
 		String language = (String) session.getAttribute(LANGUAGE);
-		System.out.println(language);
 		try {
 			if(session.getAttribute(BOOKS) == null){
 				books = bookService.getAllBooks(language != null? language:"en_US");
