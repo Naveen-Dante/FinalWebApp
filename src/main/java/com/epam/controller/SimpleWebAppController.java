@@ -40,6 +40,7 @@ public class SimpleWebAppController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println(request.getParameter("name"));
 		PROVIDER.getCommand(request.getParameter("name")).execute(request, response);
 	}
 
@@ -49,6 +50,7 @@ public class SimpleWebAppController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println(request.getParameter("name"));
 		PROVIDER.getCommand(request.getParameter("name")).execute(request, response);
 	}
 

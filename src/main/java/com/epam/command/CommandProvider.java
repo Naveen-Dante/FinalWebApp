@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.epam.command.impl.LoginCommand;
 import com.epam.command.impl.LogoutCommand;
+import com.epam.command.impl.user.DisplayBooksCommand;
+import com.epam.command.impl.user.NewUserCommand;
 
 public class CommandProvider {
 
@@ -13,13 +15,15 @@ public class CommandProvider {
 	public CommandProvider(){
 		commandMap.put("login", new LoginCommand());
 		commandMap.put("logout", new LogoutCommand());
+		commandMap.put("new", new NewUserCommand());
+		commandMap.put("books", new DisplayBooksCommand());
 		/*commandMap.put("get", new PageLoadCommand());
 		commandMap.put("login", new LoginCommand());
-		commandMap.put("new", new NewUserCommand());
+		
 		
 		commandMap.put("search", new SearchCommand());
 		commandMap.put("book", new BookCommand());
-		commandMap.put("books", new DisplayBooksCommand());*/
+		*/
 	}
 	
 	public Command getCommand(String command){

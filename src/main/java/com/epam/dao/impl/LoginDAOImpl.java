@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import com.epam.dao.LoginDAO;
 import com.epam.dao.exception.DAOException;
 import com.epam.dao.pool.ConnectionPool;
+import com.epam.dao.utility.Utility;
 import com.epam.domain.User;
 
 
@@ -42,13 +43,6 @@ public class LoginDAOImpl implements LoginDAO {
 	public User getUser(String userName, String password) throws DAOException {
 		User user = null;
 		Connection connection = POOL.getConnection();
-		System.out.println(connection);
-		try {
-			System.out.println(connection.isClosed());
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		PreparedStatement selectQuery = null;
 		try{
 			selectQuery = connection.prepareStatement(SELECT_QUERY);
@@ -67,6 +61,9 @@ public class LoginDAOImpl implements LoginDAO {
 			}
 		}catch (SQLException e) {
 			throw new DAOException("Unable to find the user..",e);
+		}finally {
+			Utility.closeStatement(selectQuery);
+			POOL.returnConnection(connection);
 		}
 		return user;
 	}

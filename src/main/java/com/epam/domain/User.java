@@ -73,6 +73,25 @@ public class User implements Serializable {
 	public void setType(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+	
+	public boolean isValid(){
+		if(this.firstName == null){
+			return false;
+		}
+		else if(this.lastName == null){
+			return false;
+		}
+		else if(this.userName == null){
+			return false;
+		}
+		else if(this.phoneNumber == null){
+			return false;
+		}
+		else if(this.email == null){
+			return false;
+		}
+		return true;
+	}
 
 	@Override
 	public int hashCode() {

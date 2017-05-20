@@ -117,11 +117,13 @@ public class ConnectionPool implements IConnectionPool {
 			if (idleQueue != null) {
 				for (Connection connection : idleQueue) {
 					connection.close();
+					System.out.println("connection closed."+connection.toString());
 				}
 			}
 			if (runningQueue != null) {
 				for (Connection connection : runningQueue) {
 					connection.close();
+					System.out.println("connection closed."+connection.toString());
 				}
 			}
 		} catch (SQLException e) {

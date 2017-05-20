@@ -26,5 +26,7 @@
 <body>
 	<jsp:include page="./WEB-INF/templates/header.jsp" />
 	<h1>${welcome}</h1>
+	<p>${pageContext.request.queryString }</p>
+	<p>${pageContext.request.requestURI }</p>
 </body>
 </html>
