@@ -34,8 +34,6 @@ public class DisplayBooksCommand implements Command {
 		HttpSession session = request.getSession(true);
 		String language = (String) session.getAttribute(LANGUAGE) != null?(String) session.getAttribute(LANGUAGE):DEFAULT_LANGUAGE;
 		String bookLanguage = (String) session.getAttribute(BOOK_LANGUAGE) != null? (String) session.getAttribute(BOOK_LANGUAGE): language;
-		System.out.println(language);
-		System.out.println(bookLanguage);
 		session.setAttribute(BOOK_LANGUAGE, bookLanguage);
 		try {
 			if(session.getAttribute(BOOKS) == null || !language.equalsIgnoreCase(bookLanguage)){
@@ -47,7 +45,6 @@ public class DisplayBooksCommand implements Command {
 				request.getRequestDispatcher("/").forward(request, response);
 			}
 			else{
-				System.out.println("forwarding");
 				request.getRequestDispatcher("/").forward(request, response);
 			}
 		} catch (ServiceException e) {

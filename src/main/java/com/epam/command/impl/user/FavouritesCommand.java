@@ -39,12 +39,10 @@ public class FavouritesCommand implements Command {
 				if(books != null){
 					session.setAttribute(BOOKS, books);
 				}
-				System.out.println("redirecting");
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("/");
 			}
 			else{
-				System.out.println("forwarding");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("/").forward(request, response);
 			}
 		} catch (ServiceException e) {
 			LOGGER.error("Can't retrieve book details.");

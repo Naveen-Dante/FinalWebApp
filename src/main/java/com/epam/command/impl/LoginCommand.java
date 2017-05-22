@@ -24,8 +24,7 @@ public class LoginCommand implements Command{
 
 	private static final String LANGUAGE = "language";
 	private static final String BOOKS = "books";
-	//private static final String WELCOME_PAGE = "WEB-INF/welcome.jsp";
-	private static final String ADMIN_PAGE = "WEB-INF/admin.jsp";
+	private static final String ADMIN_PAGE = "WEB-INF/jsp/admin.jsp";
 	private static final String IS_LOGGED_IN = "isLoggedIn";
 	private static final String USER = "user";
 	private static final String ERROR = "error";
@@ -48,7 +47,6 @@ public class LoginCommand implements Command{
 		String password = request.getParameter(PASSWORD);
 		String errorMsg = null;
 		String language = (String) session.getAttribute(LANGUAGE);
-		System.out.println(language);
 		if(userName == null || password == null){
 			response.sendRedirect("/");
 		}

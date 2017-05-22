@@ -34,7 +34,6 @@ public class BookCommand implements Command{
 		HttpSession session = request.getSession();
 		String language = (String) session.getAttribute(LANGUAGE);
 		int bookId = Integer.parseInt(request.getParameter(ID));
-		System.out.println(bookId);
 		try {
 			BookInfo searchedBook = service.getBookInfo(bookId, language);
 			if(searchedBook != null){
@@ -42,10 +41,8 @@ public class BookCommand implements Command{
 				request.setAttribute(BOOK_ERROR, false);
 			}
 			else{
-				System.out.println("Book Not found");
 				request.setAttribute(BOOK_ERROR, true);
 			}
-			System.out.println("Forwarding");
 			request.getRequestDispatcher(BOOK_JSP).forward(request, response);
 		} catch (ServiceException e) {
 			LOGGER.error("Service Exception", e);
