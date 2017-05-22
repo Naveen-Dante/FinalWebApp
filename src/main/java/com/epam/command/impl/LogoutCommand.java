@@ -16,7 +16,7 @@ public class LogoutCommand implements Command {
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
 		session.removeAttribute("isLoggedIn");
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("/");
 	}
 
 }

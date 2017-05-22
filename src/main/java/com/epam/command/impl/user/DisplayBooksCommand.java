@@ -18,6 +18,8 @@ import com.epam.service.impl.BookServiceImpl;
 
 public class DisplayBooksCommand implements Command {
 
+	private static final String DEFAULT_LANGUAGE = "en_US";
+	private static final String BOOK_LANGUAGE = "book_language";
 	private static final String LANGUAGE = "language";
 	private static BookService bookService;
 	private static final Logger LOGGER = Logger.getLogger(DisplayBooksCommand.class);
@@ -28,24 +30,25 @@ public class DisplayBooksCommand implements Command {
 	}
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("in Books Command");
 		List<Book> books;
 		HttpSession session = request.getSession(true);
-		String language = (String) session.getAttribute(LANGUAGE);
+		String language = (String) session.getAttribute(LANGUAGE) != null?(String) session.getAttribute(LANGUAGE):DEFAULT_LANGUAGE;
+		String bookLanguage = (String) session.getAttribute(BOOK_LANGUAGE) != null? (String) session.getAttribute(BOOK_LANGUAGE): language;
 		System.out.println(language);
+		System.out.println(bookLanguage);
+		session.setAttribute(BOOK_LANGUAGE, bookLanguage);
 		try {
-			if(session.getAttribute(BOOKS) == null){
-				books = bookService.getAllBooks(language != null? language:"en_US");
+			if(session.getAttribute(BOOKS) == null || !language.equalsIgnoreCase(bookLanguage)){
+				books = bookService.getAllBooks(language);
 				if(books != null){
 					session.setAttribute(BOOKS, books);
 				}
-				System.out.println("redirecting");
-				response.sendRedirect("index.jsp");
+				session.setAttribute(BOOK_LANGUAGE, language);
+				request.getRequestDispatcher("/").forward(request, response);
 			}
 			else{
 				System.out.println("forwarding");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("/").forward(request, response);
 			}
 		} catch (ServiceException e) {
 			LOGGER.error("Can't retrieve book details.");

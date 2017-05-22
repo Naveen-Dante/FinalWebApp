@@ -233,3 +233,5 @@
 		</div>
 	</div>
 </div>
+<input type="hidden" id="queryUrl" value="${pageContext.request.queryString }">
+<input type="hidden" id="reqUrl" value="${pageContext.request.requestURI }">

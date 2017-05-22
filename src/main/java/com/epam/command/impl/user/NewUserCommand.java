@@ -40,7 +40,6 @@ public class NewUserCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("New User");
 		HttpSession session = request.getSession(true);
 		User user = new User();
 		user.setFirstName(request.getParameter(FIRST_NAME));
@@ -54,21 +53,20 @@ public class NewUserCommand implements Command {
 		String errorMsg = null;
 		response.setContentType(TEXT_HTML);
 		if (!user.isValid() || password == null) {
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("/");
 		} else {
-			System.out.println("In else Loop");
 			try {
 				success = service.addNewUser(user, password);
 				if (!success) {
 					errorMsg = USER_NAME_NOT_AVAILABLE_PLEASE_TRY_AGAIN;
 					request.setAttribute(ERROR, true);
 					request.setAttribute(ERROR_MESSAGE, errorMsg);
-					request.getRequestDispatcher("index.jsp").forward(request, response);
+					request.getRequestDispatcher("/").forward(request, response);
 				} else {
 					session.setAttribute(USER, user);
 					session.setAttribute(IS_LOGGED_IN, true);
 					request.setAttribute(SUCCESS_MESSAGE, USER_SUCCESSFULLY_CREATED);
-					request.getRequestDispatcher("index.jsp").forward(request, response);
+					request.getRequestDispatcher("/").forward(request, response);
 				}
 			} catch (ServiceException e) {
 				errorMsg = "Sorry but we can not add the User: " + user.getFirstName() + " " + user.getLastName()

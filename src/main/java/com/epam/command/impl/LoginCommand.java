@@ -50,7 +50,7 @@ public class LoginCommand implements Command{
 		String language = (String) session.getAttribute(LANGUAGE);
 		System.out.println(language);
 		if(userName == null || password == null){
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("/");
 		}
 		else{
 			User user;
@@ -60,7 +60,7 @@ public class LoginCommand implements Command{
 					errorMsg = "Invalid UserName or Password!";
 					request.setAttribute(ERROR_MESSAGE, errorMsg);
 					request.setAttribute(ERROR, true);
-					request.getRequestDispatcher("index.jsp").forward(request, response);
+					request.getRequestDispatcher("/").forward(request, response);
 				}
 				else{
 					List<Book> books = bookService.getAllBooks(language);
@@ -73,7 +73,7 @@ public class LoginCommand implements Command{
 						request.getRequestDispatcher(ADMIN_PAGE).forward(request, response);
 					}
 					else
-						response.sendRedirect("index.jsp");
+						response.sendRedirect("/");
 				}
 			}catch (ServiceException e) {
 				LOGGER.error("Unable to perform Operation.",e);
