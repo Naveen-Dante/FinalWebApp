@@ -22,5 +22,11 @@ public interface BookDAO {
 
 	List<AdminBook> getAllBooks() throws DAOException;
 
+	boolean addNewBook(BookInfo book) throws DAOException;
+
+	boolean updateBook(BookInfo book) throws DAOException;
+
+	boolean removeBook(int bookId, String language) throws DAOException;
+
 	
 }

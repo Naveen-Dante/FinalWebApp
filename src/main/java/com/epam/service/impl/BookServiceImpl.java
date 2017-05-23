@@ -93,4 +93,37 @@ public class BookServiceImpl implements BookService{
 		}
 		return books;
 	}
+
+	@Override
+	public boolean addNewBook(BookInfo book) throws ServiceException {
+		boolean success;
+		try{
+			success = dao.addNewBook(book);
+		}catch(DAOException e){
+			throw new ServiceException("Cannot add book",e);
+		}
+		return success;
+	}
+
+	@Override
+	public boolean UpdateBook(BookInfo book) throws ServiceException {
+		boolean success;
+		try{
+			success = dao.updateBook(book);
+		}catch(DAOException e){
+			throw new ServiceException("Cannot add book",e);
+		}
+		return success;
+	}
+
+	@Override
+	public boolean removeBook(int bookId, String language) throws ServiceException {
+		boolean success;
+		try{
+			success = dao.removeBook(bookId,language);
+		}catch (DAOException e) {
+			throw new ServiceException("Unable to fetch Books..",e);
+		}
+		return success;
+	}
 }

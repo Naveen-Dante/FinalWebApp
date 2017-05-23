@@ -8,7 +8,13 @@ import com.epam.command.impl.ChangeLanguageCommand;
 import com.epam.command.impl.LoginCommand;
 import com.epam.command.impl.LogoutCommand;
 import com.epam.command.impl.SearchCommand;
+import com.epam.command.impl.admin.AddNewBookCommand;
+import com.epam.command.impl.admin.BookViewCommand;
 import com.epam.command.impl.admin.DashBoardCommand;
+import com.epam.command.impl.admin.GetBooksCommand;
+import com.epam.command.impl.admin.RemoveBookCommand;
+import com.epam.command.impl.admin.UpdateBookCommand;
+import com.epam.command.impl.admin.UserCommand;
 import com.epam.command.impl.user.DisplayBooksCommand;
 import com.epam.command.impl.user.FavouritesCommand;
 import com.epam.command.impl.user.NewUserCommand;
@@ -32,6 +38,14 @@ public class CommandProvider {
 		commandMap.put("login", new LoginCommand());		
 		*/
 		adminCommandMap.put("login", new DashBoardCommand());
+		adminCommandMap.put("new-book", new AddNewBookCommand());
+		adminCommandMap.put("update", new UpdateBookCommand());
+		adminCommandMap.put("book", new BookViewCommand());
+		adminCommandMap.put("books", new GetBooksCommand());
+		adminCommandMap.put("remove-book", new RemoveBookCommand());
+		adminCommandMap.put("home", new DashBoardCommand());
+		adminCommandMap.put("users", new UserCommand());
+		adminCommandMap.put("logout", new LogoutCommand());
 	}
 	
 	public Command getCommand(String command){

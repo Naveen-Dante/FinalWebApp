@@ -10,7 +10,7 @@
 <div>
 	<div class ="col-lg-3 col-md-3 col-sm-6"><h2>Books</h2></div>
 	<div class ="col-lg-3 col-md-3 col-sm-6">
-		<button class="btn btn-md btn-default" id="newbookBtn">
+		<button class="btn btn-md btn-default pull-right" id="newBookBtn">
 			ADD NEW BOOK
 		</button>
 	</div>
@@ -38,8 +38,8 @@
 				<td style="">${book.id}</td>
 				<td>${book.title}</td>
 				<td>${book.author}</td>
-				<td>${book.language }
-				<td><a href="command?name=book&id=${book.id}"><button
+				<td>${book.language }</td>
+				<td><a href="admin?command=book&id=${book.id}&language=${book.language}"><button
 							class="btn btn-default" type="submit" name="button">Get
 							More Info.</button></a></td>
 			</tr>
@@ -48,12 +48,12 @@
 </table>
 <div class="modal fade" id="newBook" role="dialog">
 	<div class="modal-dialog">
-		<div class="modal-content">
+		<div class="modal-content" style="color:black;">
 			<div class="modal-header modal-header-info"
 				style="padding: 10px 50px;">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4>
-					<span class="glyphicon glyphicon-book pull-right" ></span> Add Book
+					<span class="glyphicon glyphicon-book" ></span> Add Book
 				</h4>
 			</div>
 			<div class="modal-body" style="padding: 30px 50px;">
@@ -79,7 +79,7 @@
 						<label class="control-label col-sm-4" for="Image URL">Image
 							URL: </label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="imageurl"
+							<input type="url" class="form-control" name="imageurl"
 								placeholder="Enter Image URL" required>
 						</div>
 					</div>
@@ -104,7 +104,12 @@
 							</label>
 						</div>
 					</div>
-
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="description">Description: </label>
+						<div class="col-sm-8">
+							<textarea class="form-control" rows="4" name="description"></textarea>
+						</div>
+					</div>
 					<button type="submit" class="btn btn-success btn-block">
 						<span class="glyphicon glyphicon-off"></span>Add
 					</button>

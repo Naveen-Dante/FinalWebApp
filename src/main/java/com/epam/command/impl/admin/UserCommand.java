@@ -19,19 +19,19 @@ import com.epam.service.exception.ServiceException;
 import com.epam.service.impl.BookServiceImpl;
 import com.epam.service.impl.UserServiceImpl;
 
-public class DashBoardCommand implements Command {
+public class UserCommand implements Command {
 
-	private static final String ALL_USERS = "allUsers";
+	private static final String ALL_USERS = "allUser";
 	private static final String ALL_BOOKS = "allBooks";
 	private static final String TOTAL_USERS = "totalUsers";
 	private static final String TOTAL_BOOKS = "totalBooks";
-	private static final String ADMIN_PAGE = "WEB-INF/jsp/admin.jsp";
+	private static final String ADMIN_PAGE = "WEB-INF/jsp/user.jsp";
 	private static final String USER = "user";
 	private static UserService userService;
 	private static BookService bookService;
 	private static final Logger LOGGER = Logger.getLogger(DashBoardCommand.class);
 	
-	public DashBoardCommand() {
+	public UserCommand() {
 		userService = UserServiceImpl.getInstance();
 		bookService = BookServiceImpl.getInstance();
 	}
@@ -55,6 +55,9 @@ public class DashBoardCommand implements Command {
 				if(totalUsers != totalUsersPresent || session.getAttribute(ALL_USERS) == null){
 					users = userService.getUsers();
 					session.setAttribute(ALL_USERS, users);
+					for(User user: users){
+						System.out.println(user.toString());
+					}
 				}
 				session.setAttribute(TOTAL_BOOKS, totalBooksPresent);
 				session.setAttribute(TOTAL_USERS, totalUsersPresent);

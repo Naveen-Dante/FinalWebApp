@@ -33,7 +33,7 @@
 							<td>${book.id}</td>
 							<td>${book.title}</td>
 							<td>${book.author}</td>
-							<td><a href="command?name=book&id=${book.id}"><button class="btn btn-default" type="submit"
+							<td><a href="/command?name=book&id=${book.id}"><button class="btn btn-default" type="submit"
 									name="button">Get More Info.</button></a></td>
 						</tr>
 					</c:forEach>

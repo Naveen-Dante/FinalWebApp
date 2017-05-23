@@ -9,6 +9,7 @@ public class BookInfo extends Book{
 	
 	String imageUrl;
 	String description;
+	String language;
 	
 	public BookInfo() {
 	}
@@ -33,6 +34,14 @@ public class BookInfo extends Book{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	@Override
@@ -68,8 +77,9 @@ public class BookInfo extends Book{
 
 	@Override
 	public String toString() {
-		return "BookInfo [imageUrl=" + imageUrl + ", description=" + description + ", getId()=" + getId()
-				+ ", getTitle()=" + getTitle() + ", getAuthor()=" + getAuthor() + ", getType()=" + getType() + "]";
+		return "BookInfo [imageUrl=" + imageUrl + ", description=" + description + ", language=" + language
+				+ ", getId()=" + getId() + ", getTitle()=" + getTitle() + ", getAuthor()=" + getAuthor()
+				+ ", getType()=" + getType() + "]";
 	}
-	
+
 }

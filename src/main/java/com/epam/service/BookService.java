@@ -21,4 +21,10 @@ public interface BookService {
 	int getBooksCount() throws ServiceException;
 
 	List<AdminBook> getAllBooks() throws ServiceException;
+
+	boolean addNewBook(BookInfo book) throws ServiceException;
+
+	boolean UpdateBook(BookInfo book) throws ServiceException;
+
+	boolean removeBook(int bookId, String language) throws ServiceException;
 }
