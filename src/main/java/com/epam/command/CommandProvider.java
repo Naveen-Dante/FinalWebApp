@@ -16,9 +16,9 @@ import com.epam.command.impl.user.NewUserCommand;
 public class CommandProvider {
 
 	private static Map<String, Command> commandMap = new HashMap<String, Command>();
+	private static Map<String, Command> adminCommandMap = new HashMap<String, Command>();
 	
 	public CommandProvider(){
-		commandMap.put("admin", new DashBoardCommand());
 		commandMap.put("login", new LoginCommand());
 		commandMap.put("logout", new LogoutCommand());
 		commandMap.put("new", new NewUserCommand());
@@ -29,15 +29,16 @@ public class CommandProvider {
 		commandMap.put("favourites", new FavouritesCommand());
 		commandMap.put(null, new DisplayBooksCommand());
 		/*commandMap.put("get", new PageLoadCommand());
-		commandMap.put("login", new LoginCommand());
-		
-		
-		
-		
+		commandMap.put("login", new LoginCommand());		
 		*/
+		adminCommandMap.put("login", new DashBoardCommand());
 	}
 	
 	public Command getCommand(String command){
 		return commandMap.get(command);
+	}
+	
+	public Command getAdminCommand(String command){
+		return adminCommandMap.get(command);
 	}
 }

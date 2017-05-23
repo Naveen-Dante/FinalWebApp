@@ -1,7 +1,6 @@
 package com.epam.controller;
 
 import java.io.IOException;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +14,8 @@ import com.epam.command.CommandProvider;
  * Servlet implementation class SimpleWebAppController
  */
 public class SimpleWebAppController extends HttpServlet {
+
+	private static final String ADMIN_COMMAND = "command";
 
 	private static final String NAME = "name";
 
@@ -40,8 +41,14 @@ public class SimpleWebAppController extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String parameter = request.getParameter(NAME);
-		System.out.println(parameter);
-		PROVIDER.getCommand(parameter).execute(request, response);
+		String adminCommand = request.getParameter(ADMIN_COMMAND);
+		if(adminCommand != null){
+			PROVIDER.getAdminCommand(adminCommand).execute(request, response);
+		}
+		else{
+			PROVIDER.getCommand(parameter).execute(request, response);
+		}
+		
 	}
 
 	/**
@@ -50,8 +57,15 @@ public class SimpleWebAppController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println(request.getParameter(NAME));
-		PROVIDER.getCommand(request.getParameter(NAME)).execute(request, response);
+		String parameter = request.getParameter(NAME);
+		String adminCommand = request.getParameter(ADMIN_COMMAND);
+		if(adminCommand != null){
+			PROVIDER.getAdminCommand(adminCommand).execute(request, response);
+		}
+		else{
+			PROVIDER.getCommand(parameter).execute(request, response);
+		}
+		//PROVIDER.getCommand(request.getParameter(NAME)).execute(request, response);
 	}
 
 }

@@ -12,12 +12,15 @@ import com.epam.domain.User;
 
 public class DashBoardCommand implements Command{
 
+	private static final String ADMIN_PAGE = "WEB_INF/jsp/admin.jsp";
+	private static final String USER = "user";
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(true);
-		User admin = (User) session.getAttribute("user");
+		User admin = (User) session.getAttribute(USER);
 		if(admin.isAdmin()){
-			request.getRequestDispatcher("WEB_INF/jsp/admin.jsp").forward(request, response);
+			request.getRequestDispatcher(ADMIN_PAGE).forward(request, response);
 		}
 		else{
 			response.sendRedirect("/");

@@ -8,11 +8,11 @@
 				id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
 	</ul>
 	<ul class="sidebar-nav" id="sidebar">
-		<li><a href=admin/command?name=admin_home>Home<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
-		<li><a href=admin/command?name=admin_books>Books<span class="sub_icon glyphicon glyphicon-book"></span></a></li>
-		<li><a href=admin/command?name=admin_users>Users<span class="sub_icon glyphicon glyphicon-user"></span></a></li>
-		<li><a href="admin/command?name=admin_about">About us<span
+		<li><a href=/admin?command=home>Home<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
+		<li><a href=/admin?command=books>Books<span class="sub_icon glyphicon glyphicon-book"></span></a></li>
+		<li><a href=/admin?command=users>Users<span class="sub_icon glyphicon glyphicon-user"></span></a></li>
+		<li><a href="/admin?command=about">About us<span
 				class="sub_icon glyphicon glyphicon-paperclip"></span></a></li>
-		<li><a href="/command?name=logout">Logout<span class="sub_icon glyphicon glyphicon-off"></span></a></li>
+		<li><a href="/admin?command=logout">Logout<span class="sub_icon glyphicon glyphicon-off"></span></a></li>
 	</ul>
 </div>

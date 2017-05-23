@@ -21,7 +21,7 @@ import com.epam.service.impl.LoginServiceImpl;
 
 public class LoginCommand implements Command {
 
-	private static final String ADMIN = "/admin";
+	private static final String ADMIN = "/admin?command=login";
 	private static final String REDIRECT = "/command?name=login";
 	private static final String LANGUAGE = "language";
 	private static final String BOOKS = "books";
@@ -32,7 +32,6 @@ public class LoginCommand implements Command {
 	private static final String PASSWORD = "password";
 	private static final String USERNAME = "username";
 	private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
-	private static final String ADMIN_REDIRECT = ADMIN;
 	private static LoginService service;
 	private static BookService bookService;
 
@@ -76,7 +75,7 @@ public class LoginCommand implements Command {
 						session.setAttribute(USER, user);
 						session.setAttribute(IS_LOGGED_IN, true);
 						if (user.isAdmin()) {
-							response.sendRedirect(ADMIN_REDIRECT);
+							response.sendRedirect(ADMIN);
 							// request.getRequestDispatcher(ADMIN_PAGE).forward(request,
 							// response);
 						} else
