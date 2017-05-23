@@ -11,11 +11,15 @@ import com.epam.dao.BookDAO;
 import com.epam.dao.exception.DAOException;
 import com.epam.dao.pool.ConnectionPool;
 import com.epam.dao.utility.Utility;
+import com.epam.domain.AdminBook;
 import com.epam.domain.Book;
 import com.epam.domain.BookInfo;
 import com.epam.domain.BookType;
+import com.epam.domain.Language;
 
 public class BookDAOImpl implements BookDAO {
+
+	private static final String BOOK_COUNT = "count";
 
 	private static final String PAPER_BOUND = "paper";
 
@@ -50,7 +54,11 @@ public class BookDAOImpl implements BookDAO {
 
 	private static final String SELECT_ALL_QUERY = "select * from book where language=?";
 
+	private static final String SELECT_ALL_BOOKS_QUERY = "SELECT * FROM book";
+
 	private static final String SELECT_BOOK_QUERY = "select * from book where id=? and language=?";
+
+	private static final String BOOKS_COUNT_QUERY = "SELECT count(*) AS count FROM book";
 
 	private BookDAOImpl() {
 
@@ -170,6 +178,52 @@ public class BookDAOImpl implements BookDAO {
 			POOL.returnConnection(connection);
 		}
 		return book;
+	}
+
+	@Override
+	public int getBooksCount() throws DAOException {
+		int count = -1;
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(BOOKS_COUNT_QUERY);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				count = resultSet.getInt(BOOK_COUNT);
+			}
+		} catch (SQLException e) {
+			throw new DAOException("Unable to retrieve data", e);
+		} finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return count;
+	}
+
+	@Override
+	public List<AdminBook> getAllBooks() throws DAOException {
+		List<AdminBook> books = new ArrayList<AdminBook>();
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(SELECT_ALL_BOOKS_QUERY);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				AdminBook book = new AdminBook();
+				book.setId(resultSet.getInt(BOOK_ID));
+				book.setTitle(resultSet.getString(BOOK_TITLE));
+				book.setAuthor(resultSet.getString(BOOK_AUTHOR));
+				book.setLanguage(resultSet.getString("language").equalsIgnoreCase("en_US") ? Language.ENGLISH
+						: Language.ESPANOL);
+				books.add(book);
+			}
+		} catch (SQLException e) {
+			throw new DAOException("Unable to retrieve data", e);
+		} finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return books;
 	}
 
 }

@@ -23,13 +23,14 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="./css/admin.css" rel="stylesheet">
 <script src="./js/admin.js"></script>
+<link href="./css/tiles.css" rel="stylesheet">
 <title>Admin</title>
 </head>
 <body lang="${language }" style="background-color: rgba(0,0,0,0.85); color: white">
 	<jsp:include page="../templates/adminNavbar.jsp"></jsp:include>
 	<div class="main">
 		<h1 style="font-weight: bold;">DashBoard<span style="font-size: 18px; font-weight: lighter;"> Control Panel</span></h1>
-		
+		<jsp:include page="../templates/admintiles.jsp"></jsp:include>
 	</div>
 	
 </body>

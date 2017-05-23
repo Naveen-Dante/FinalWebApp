@@ -5,6 +5,7 @@ import java.util.List;
 import com.epam.dao.BookDAO;
 import com.epam.dao.exception.DAOException;
 import com.epam.dao.impl.BookDAOImpl;
+import com.epam.domain.AdminBook;
 import com.epam.domain.Book;
 import com.epam.domain.BookInfo;
 import com.epam.service.BookService;
@@ -65,6 +66,28 @@ public class BookServiceImpl implements BookService{
 		List<Book> books;
 		try{
 			books = dao.getAllBooks(language);
+		}catch (DAOException e) {
+			throw new ServiceException("Unable to fetch Books..",e);
+		}
+		return books;
+	}
+
+	@Override
+	public int getBooksCount() throws ServiceException {
+		int count;
+		try{
+			count = dao.getBooksCount();
+		}catch (DAOException e) {
+			throw new ServiceException("Unable to fetch Books..",e);
+		}
+		return count;
+	}
+
+	@Override
+	public List<AdminBook> getAllBooks() throws ServiceException {
+		List<AdminBook> books;
+		try{
+			books = dao.getAllBooks();
 		}catch (DAOException e) {
 			throw new ServiceException("Unable to fetch Books..",e);
 		}

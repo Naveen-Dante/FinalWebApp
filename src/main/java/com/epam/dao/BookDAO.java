@@ -3,6 +3,7 @@ package com.epam.dao;
 import java.util.List;
 
 import com.epam.dao.exception.DAOException;
+import com.epam.domain.AdminBook;
 import com.epam.domain.Book;
 import com.epam.domain.BookInfo;
 
@@ -16,6 +17,10 @@ public interface BookDAO {
 	BookInfo searchBookInfo(int bookId, String language) throws DAOException;
 	
 	List<Book> getAllBooks(String language) throws DAOException;
+
+	int getBooksCount() throws DAOException;
+
+	List<AdminBook> getAllBooks() throws DAOException;
 
 	
 }
