@@ -1,4 +1,4 @@
-body{background-color: #ecf0f1;}
+body{background-color: rgba(0,0,0,0.85)}
 
 @media (min-width:768px){
 .container-1{width:15%;float:left;}

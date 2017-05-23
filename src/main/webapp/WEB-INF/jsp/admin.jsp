@@ -32,6 +32,7 @@
 	<div class="main">
 		<h1 style="font-weight: bold;">DashBoard<span style="font-size: 18px; font-weight: lighter;"> Control Panel</span></h1>
 		<jsp:include page="../templates/admintiles.jsp"></jsp:include>
+		
 	</div>
 	
 </body>
