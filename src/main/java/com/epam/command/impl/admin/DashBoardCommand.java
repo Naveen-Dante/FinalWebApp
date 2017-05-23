@@ -12,7 +12,7 @@ import com.epam.domain.User;
 
 public class DashBoardCommand implements Command{
 
-	private static final String ADMIN_PAGE = "WEB_INF/jsp/admin.jsp";
+	private static final String ADMIN_PAGE = "WEB-INF/jsp/admin.jsp";
 	private static final String USER = "user";
 
 	@Override
