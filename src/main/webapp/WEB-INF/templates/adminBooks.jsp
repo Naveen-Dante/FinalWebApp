@@ -15,19 +15,27 @@
 		</button>
 	</div>
 </div>
-<table class="table table-hover table-bordered table-inverse">
+<style>
+.sidebar-nav li a:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    text-decoration: none;
+    cursor: pointer;
+}</style>
+<table class="table table-bordered table-inverse">
 	<thead>
 		<tr>
 			<th>${book_id }</th>
 			<th>${book_title }</th>
 			<th>${author }</th>
-			<th>${info }</th>
+			<th>Language</th>
+			<th>Information</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${allBooks}" var="book">
 			<tr>
-				<td>${book.id}</td>
+				<td style="">${book.id}</td>
 				<td>${book.title}</td>
 				<td>${book.author}</td>
 				<td>${book.language }
@@ -45,7 +53,7 @@
 				style="padding: 10px 50px;">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4>
-					<span class="glyphicon glyphicon-book"></span> Add Book
+					<span class="glyphicon glyphicon-book pull-right" ></span> Add Book
 				</h4>
 			</div>
 			<div class="modal-body" style="padding: 30px 50px;">
