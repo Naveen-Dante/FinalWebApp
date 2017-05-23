@@ -35,7 +35,7 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="command?name=books">${books }</a></li>
+				<li><a href="/command?name=books">${books }</a></li>
 				<li><a class="clickable" id="favsBtn">${favs }</a></li>
 			</ul>
 			<form class="navbar-form navbar-left" role="search"
@@ -58,8 +58,8 @@
 					<li><a class="clickable" id="loginBtn"><b>${login }</b> </a></li>
 				</c:if>
 				<c:if test="${user!= null }">
-					<li><a href="command?name=profile" id="isLoggedIn">${user.firstName}</a></li>
-					<li><a href="command?name=logout">${logout }</a></li>
+					<li><a href="/command?name=profile" id="isLoggedIn">${user.firstName}</a></li>
+					<li><a href="/command?name=logout">${logout }</a></li>
 				</c:if>
 				<li><a class="clickable" id="engBtn">English</a></li>
 				<li><a class="clickable" id="espBtn">Espanol</a></li>

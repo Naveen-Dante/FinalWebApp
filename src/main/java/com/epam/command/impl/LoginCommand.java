@@ -19,12 +19,12 @@ import com.epam.service.exception.ServiceException;
 import com.epam.service.impl.BookServiceImpl;
 import com.epam.service.impl.LoginServiceImpl;
 
-public class LoginCommand implements Command{
+public class LoginCommand implements Command {
 
-
+	private static final String ADMIN = "/admin";
+	private static final String REDIRECT = "/command?name=login";
 	private static final String LANGUAGE = "language";
 	private static final String BOOKS = "books";
-	private static final String ADMIN_PAGE = "WEB-INF/jsp/admin.jsp";
 	private static final String IS_LOGGED_IN = "isLoggedIn";
 	private static final String USER = "user";
 	private static final String ERROR = "error";
@@ -32,14 +32,15 @@ public class LoginCommand implements Command{
 	private static final String PASSWORD = "password";
 	private static final String USERNAME = "username";
 	private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
+	private static final String ADMIN_REDIRECT = ADMIN;
 	private static LoginService service;
 	private static BookService bookService;
-	
-	public LoginCommand(){
+
+	public LoginCommand() {
 		service = LoginServiceImpl.getInstance();
 		bookService = BookServiceImpl.getInstance();
 	}
-	
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -47,34 +48,43 @@ public class LoginCommand implements Command{
 		String password = request.getParameter(PASSWORD);
 		String errorMsg = null;
 		String language = (String) session.getAttribute(LANGUAGE);
-		if(userName == null || password == null){
-			response.sendRedirect("/");
-		}
-		else{
-			User user;
-			try{
-				user = service.getUser(userName, password);
-				if(user == null){
-					errorMsg = "Invalid UserName or Password!";
-					request.setAttribute(ERROR_MESSAGE, errorMsg);
-					request.setAttribute(ERROR, true);
-					request.getRequestDispatcher("/").forward(request, response);
-				}
-				else{
-					List<Book> books = bookService.getAllBooks(language);
-					if(books != null){ 
-						session.setAttribute(BOOKS, books);
+		if (session.getAttribute(USER) != null) {
+			User user = (User)session.getAttribute(USER);
+			if(user.isAdmin()){
+				response.sendRedirect(ADMIN);
+			}
+			else{
+				request.getRequestDispatcher("/").forward(request, response);
+			}
+		} else {
+			if (userName == null || password == null) {
+				response.sendRedirect("/");
+			} else {
+				User user;
+				try {
+					user = service.getUser(userName, password);
+					if (user == null) {
+						errorMsg = "Invalid UserName or Password!";
+						request.setAttribute(ERROR_MESSAGE, errorMsg);
+						request.setAttribute(ERROR, true);
+						request.getRequestDispatcher("/").forward(request, response);
+					} else {
+						List<Book> books = bookService.getAllBooks(language);
+						if (books != null) {
+							session.setAttribute(BOOKS, books);
+						}
+						session.setAttribute(USER, user);
+						session.setAttribute(IS_LOGGED_IN, true);
+						if (user.isAdmin()) {
+							response.sendRedirect(ADMIN_REDIRECT);
+							// request.getRequestDispatcher(ADMIN_PAGE).forward(request,
+							// response);
+						} else
+							response.sendRedirect(REDIRECT);
 					}
-					session.setAttribute(USER, user);
-					session.setAttribute(IS_LOGGED_IN, true);
-					if(user.isAdmin()){
-						request.getRequestDispatcher(ADMIN_PAGE).forward(request, response);
-					}
-					else
-						response.sendRedirect("/");
+				} catch (ServiceException e) {
+					LOGGER.error("Unable to perform Operation.", e);
 				}
-			}catch (ServiceException e) {
-				LOGGER.error("Unable to perform Operation.",e);
 			}
 		}
 	}
