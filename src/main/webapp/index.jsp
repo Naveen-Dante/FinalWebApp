@@ -21,6 +21,10 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<c:if test="${sessionScope.get('user') == null && sessionScope.get('user').type ne 'admin' && sessionScope.get('user').type ne'moder'}">
+    <c:redirect />
+</c:if>
+<c:if test="${sessionScope.get('user').isAdmin }"></c:if>
 <title>JSP Page</title>
 <link href="./css/style.css" rel="stylesheet">
 <script src="./js/main.js"></script>

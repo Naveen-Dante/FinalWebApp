@@ -73,9 +73,7 @@ public class BookDAOImpl implements BookDAO {
 	private static final String UPDATE_BOOK = "UPDATE `gg4hyz6gpvflvqpc`.`book` SET "
 			+ "`title`=?, `author`=?, `description`=?, `imageurl`=? WHERE `id`=? and`language`=?";
 
-	private static final String DELETE_BOOK_RELATION = "DELETE FROM `gg4hyz6gpvflvqpc`.`user_has_book` WHERE `book_id`=?";
-
-	private static final String DELETE_BOOK = "DELETE FROM `gg4hyz6gpvflvqpc`.`book` WHERE `id`=? and `language`=?";
+	private static final String DELETE_BOOK = "DELETE FROM `gg4hyz6gpvflvqpc`.`book` WHERE `id`=?";
 
 	private BookDAOImpl() {
 
@@ -301,19 +299,15 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public boolean removeBook(int bookId, String language) throws DAOException {
-		Connection connection = null ;
+		Connection connection = null;
 		PreparedStatement statement = null;
 		boolean success = false;
 		try {
-			if (deleteRelation(bookId)) {
-				System.out.println("Calling procedure");
-				connection = POOL.getConnection();
-				statement = connection.prepareCall(DELETE_BOOK);
-				statement.setInt(1, bookId);
-				statement.setString(2, language);
-				success = statement.execute();
-				System.out.println(success);
-			}
+			System.out.println("Calling procedure");
+			connection = POOL.getConnection();
+			statement = connection.prepareCall(DELETE_BOOK);
+			statement.setInt(1, bookId);
+			success = statement.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("Unable to Write data", e);
@@ -321,25 +315,6 @@ public class BookDAOImpl implements BookDAO {
 		} finally {
 			Utility.closeStatement(statement);
 			POOL.returnConnection(connection);
-		}
-		return success;
-	}
-
-	private boolean deleteRelation(int bookId) throws DAOException {
-		boolean success;
-		Connection connection = POOL.getConnection();
-		PreparedStatement statement = null;
-		try {
-				System.out.println("Calling procedure");
-				statement = connection.prepareCall(DELETE_BOOK_RELATION);
-				statement.setInt(1, bookId);
-				statement.executeUpdate();
-				success = true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DAOException("Unable to Write data", e);
-		} finally {
-			Utility.closeStatement(statement);
 		}
 		return success;
 	}
