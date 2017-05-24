@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.epam.command.impl.BookCommand;
 import com.epam.command.impl.ChangeLanguageCommand;
+import com.epam.command.impl.LoadHomePage;
 import com.epam.command.impl.LoginCommand;
 import com.epam.command.impl.LogoutCommand;
 import com.epam.command.impl.SearchCommand;
@@ -33,7 +34,7 @@ public class CommandProvider {
 		commandMap.put("search", new SearchCommand());
 		commandMap.put("changelanguage", new ChangeLanguageCommand());
 		commandMap.put("favourites", new FavouritesCommand());
-		commandMap.put(null, new DisplayBooksCommand());
+		commandMap.put(null, new LoadHomePage());
 		/*commandMap.put("get", new PageLoadCommand());
 		commandMap.put("login", new LoginCommand());		
 		*/

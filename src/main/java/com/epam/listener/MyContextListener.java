@@ -3,6 +3,8 @@ package com.epam.listener;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.log4j.PropertyConfigurator;
+
 import com.epam.service.ConnectionPoolService;
 import com.epam.service.impl.ConnectionPoolServiceImpl;
 
@@ -17,6 +19,7 @@ public class MyContextListener implements ServletContextListener {
     /**
      * Default constructor. 
      */
+	private static final String LOG_CONFIG = "resource/ConfigLogger.properties";
     public MyContextListener() {
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +36,8 @@ public class MyContextListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
-         SERVICE.init();
+    	PropertyConfigurator.configure(LOG_CONFIG);
+        SERVICE.init();
     }
 	
 }
