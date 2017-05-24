@@ -59,7 +59,9 @@ public class NewUserDAOImpl implements NewUserDAO {
 		} catch (SQLException e) {
 			throw new DAOException("Unable to Create New User", e);
 		} finally {
-			Utility.closeStatement(insertQuery);
+			if(success){
+				Utility.closeStatement(insertQuery);
+			}
 			POOL.returnConnection(connection);
 		}
 		return success;
