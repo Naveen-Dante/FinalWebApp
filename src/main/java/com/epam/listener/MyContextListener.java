@@ -19,7 +19,7 @@ public class MyContextListener implements ServletContextListener {
     /**
      * Default constructor. 
      */
-	private static final String LOG_CONFIG = "resource/ConfigLogger.properties";
+	private static final String LOG_CONFIG = "main/resources/ConfigLogger.properties";
     public MyContextListener() {
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,7 @@ public class MyContextListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
-    	PropertyConfigurator.configure(LOG_CONFIG);
+    	PropertyConfigurator.configureAndWatch(LOG_CONFIG);
         SERVICE.init();
     }
 	
