@@ -1,57 +1,122 @@
+/*=========================================== For Index Wrapper ================================================*/
+.tilewrapper {
+	margin: auto;
+	width: 600px;
+}
+
+.tile {
+	width: 100%;
+	display: inline-block;
+	box-sizing: border-box;
+	background: #fff;
+	padding: 20px;
+	margin-bottom: 30px;
+}
+
+.tile .title {
+	margin-top: 0px;
+}
+
+.tile.purple, .tile.blue, .tile.red, .tile.orange, .tile.green {
+	color: #fff;
+}
+
+.tile.purple {
+	background: #5133ab;
+}
+
+.tile.purple:hover {
+	background: #3e2784;
+}
+
+.tile.red {
+	background: #ac193d;
+}
+
+.tile.red:hover {
+	background: #7f132d;
+}
+
+.tile.green {
+	background: #00a600;
+}
+
+.tile.green:hover {
+	background: #007300;
+}
+
+.tile.blue {
+	background: #2672ec;
+}
+
+.tile.blue:hover {
+	background: #125acd;
+}
+
+.tile.orange {
+	background: #dc572e;
+}
+
+.tile.orange:hover {
+	background: #b8431f;
+}
+
 /*=========================================== For Centered table ================================================*/
-.center-table{
+.center-table {
 	max-width: 800px;
 	margin: auto;
 }
 
 /*=========================================== For the SideBar ================================================*/
 .sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
 }
 
 .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
 }
 
-.sidenav a:hover, .offcanvas a:focus{
-    color: #f1f1f1;
+.sidenav a:hover, .offcanvas a:focus {
+	color: #f1f1f1;
 }
 
 .sidenav .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
 }
 
 .main {
-    transition: margin-left .5s;
-    padding: 20px;
-}
-        
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+	transition: margin-left .5s;
+	padding: 20px;
 }
 
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 18px;
+	}
+}
 
 /*=========================================== For the Modals ================================================*/
-
 .modal-header, h4, .close {
 	color: black !important;
 	text-align: center;

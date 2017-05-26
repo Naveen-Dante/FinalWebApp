@@ -55,7 +55,7 @@ public class LoginDAOImpl implements LoginDAO {
 					user.setLastName(rs.getString(LASTNAME));
 					user.setUserName(rs.getString(USERNAME));
 					user.setEmail(rs.getString(EMAIL));
-					user.setType(rs.getInt(IS_ADMIN) == 0? false : true);
+					user.setAdmin(rs.getInt(IS_ADMIN) == 0? false : true);
 					user.setPhoneNumber(new BigInteger(rs.getString(PHONENUMBER)));
 				}
 			}

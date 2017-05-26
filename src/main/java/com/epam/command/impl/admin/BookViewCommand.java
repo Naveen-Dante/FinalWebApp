@@ -5,14 +5,12 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
 import com.epam.command.Command;
 import com.epam.command.impl.BookCommand;
 import com.epam.domain.BookInfo;
-import com.epam.domain.Language;
 import com.epam.service.BookService;
 import com.epam.service.exception.ServiceException;
 import com.epam.service.impl.BookServiceImpl;

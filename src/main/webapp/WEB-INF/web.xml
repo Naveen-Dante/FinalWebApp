@@ -16,17 +16,8 @@
     <servlet-name>controller</servlet-name>
     <url-pattern>/command</url-pattern>
    	<url-pattern>/admin</url-pattern>
-    
   </servlet-mapping>
   <listener>
     <listener-class>com.epam.listener.MyContextListener</listener-class>
   </listener>
-  <context-param>
-  	<param-name>/a</param-name>
-  	<param-value>WEB-INF/jsp/admin.jsp</param-value>
-  </context-param>
-  <context-param>
-  	<param-name>/in</param-name>
-  	<param-value>WEB-INF/jsp/index.jsp</param-value>
-  </context-param>
 </web-app>

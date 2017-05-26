@@ -21,16 +21,13 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<c:if test="${sessionScope.get('user') != null && sessionScope.get('user').isAdmin() == true}">
-    <c:redirect url="/admin?command=books"/>
-</c:if>
-<title>JSP Page</title>
+<title>Books</title>
 <link href="./css/style.css" rel="stylesheet">
 <script src="./js/main.js"></script>
 </head>
 <body>
 	<div class="main">
-		<jsp:include page="./WEB-INF/templates/header.jsp" />
+		<jsp:include page="../templates/header.jsp" />
 		<c:if test="${error == true }">
 			<div class="alert alert-danger alert-dismissable fade in">
 				<a href="#" class="close" data-dismiss="alert" aria-label="close">x</a>
@@ -43,12 +40,15 @@
 				<strong>Success!</strong> <span>"${success_message }"</span>
 			</div>
 		</c:if>
-		<%-- <c:if test="${books != null}">
-			<jsp:include page="./WEB-INF/templates/books.jsp" />
-		</c:if> --%>
+		<c:if test="${user == null}">
+			<jsp:include page="../templates/books.jsp" />
+		</c:if>
+		<c:if test="${user != null }">
+			<jsp:include page="../templates/userbooks.jsp"></jsp:include>
+		</c:if>
 	</div>
 </body>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 	$(document).ready(function() {
 		if ($('#books_table').length < 1) {
 			$.get('command?name=books', function() {
@@ -58,5 +58,5 @@
 			});
 		}
 	})
-</script> -->
+</script>
 </html>

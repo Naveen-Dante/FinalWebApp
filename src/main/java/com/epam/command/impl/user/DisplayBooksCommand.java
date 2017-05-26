@@ -11,15 +11,17 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.epam.command.Command;
-import com.epam.domain.Book;
+import com.epam.domain.User;
+import com.epam.domain.UserBook;
 import com.epam.service.BookService;
 import com.epam.service.exception.ServiceException;
 import com.epam.service.impl.BookServiceImpl;
 
 public class DisplayBooksCommand implements Command {
 
+	private static final String HOME_PAGE = "/";
+	private static final String BOOKS_JSP = "WEB-INF/jsp/books.jsp";
 	private static final String DEFAULT_LANGUAGE = "en_US";
-	private static final String BOOK_LANGUAGE = "book_language";
 	private static final String LANGUAGE = "language";
 	private static BookService bookService;
 	private static final Logger LOGGER = Logger.getLogger(DisplayBooksCommand.class);
@@ -28,27 +30,32 @@ public class DisplayBooksCommand implements Command {
 	public DisplayBooksCommand() {
 		bookService = BookServiceImpl.getInstance();
 	}
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Book> books;
 		HttpSession session = request.getSession(true);
-		String language = (String) session.getAttribute(LANGUAGE) != null?(String) session.getAttribute(LANGUAGE):DEFAULT_LANGUAGE;
-		String bookLanguage = (String) session.getAttribute(BOOK_LANGUAGE) != null? (String) session.getAttribute(BOOK_LANGUAGE): language;
-		session.setAttribute(BOOK_LANGUAGE, bookLanguage);
+		String language = (String) session.getAttribute(LANGUAGE) != null ? (String) session.getAttribute(LANGUAGE)
+				: DEFAULT_LANGUAGE;
+		User user = (User) session.getAttribute("user");
+		List<UserBook> books = null;
 		try {
-			if(session.getAttribute(BOOKS) == null || !language.equalsIgnoreCase(bookLanguage)){
-				books = bookService.getAllBooks(language);
-				if(books != null){
-					session.setAttribute(BOOKS, books);
-				}
-				session.setAttribute(BOOK_LANGUAGE, language);
-				request.getRequestDispatcher("/").forward(request, response);
+			if(user != null){
+				books = bookService.getAllBooks(language,user.getUserName());
 			}
 			else{
-				request.getRequestDispatcher("/").forward(request, response);
+				books = bookService.getAllBooks(language);
+			}
+			if (books != null) {
+				for (UserBook userBook : books) {
+					System.out.println(userBook.toString());
+				}
+				request.setAttribute(BOOKS, books);
+				request.getRequestDispatcher(BOOKS_JSP).forward(request, response);
+			} else {
+				request.getRequestDispatcher(HOME_PAGE).forward(request, response);
 			}
 		} catch (ServiceException e) {
-			LOGGER.error("Can't retrieve book details.");
+			LOGGER.error("Can't retrieve book details.",e);
 		}
 	}
 

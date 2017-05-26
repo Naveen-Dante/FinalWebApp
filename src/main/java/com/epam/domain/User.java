@@ -30,6 +30,15 @@ public class User implements Serializable {
 		this.isAdmin = isAdmin;
 	}
 
+	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -146,11 +155,6 @@ public class User implements Serializable {
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName + ", phoneNumber="
 				+ phoneNumber + ", email=" + email + "]";
-	}
-
-	public boolean isAdmin() {
-		// TODO Auto-generated method stub
-		return isAdmin;
 	}
 
 }

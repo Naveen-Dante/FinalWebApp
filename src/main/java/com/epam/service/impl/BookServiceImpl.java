@@ -8,6 +8,7 @@ import com.epam.dao.impl.BookDAOImpl;
 import com.epam.domain.AdminBook;
 import com.epam.domain.Book;
 import com.epam.domain.BookInfo;
+import com.epam.domain.UserBook;
 import com.epam.service.BookService;
 import com.epam.service.exception.ServiceException;
 
@@ -62,8 +63,8 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public List<Book> getAllBooks(String language) throws ServiceException {
-		List<Book> books;
+	public List<UserBook> getAllBooks(String language) throws ServiceException {
+		List<UserBook> books;
 		try{
 			books = dao.getAllBooks(language);
 		}catch (DAOException e) {
@@ -123,6 +124,28 @@ public class BookServiceImpl implements BookService{
 			success = dao.removeBook(bookId,language);
 		}catch (DAOException e) {
 			throw new ServiceException("Unable to fetch Books..",e);
+		}
+		return success;
+	}
+
+	@Override
+	public List<UserBook> getAllBooks(String language, String userName) throws ServiceException {
+		List<UserBook> books;
+		try{
+			books = dao.getAllBooks(language, userName);
+		}catch (DAOException e) {
+			throw new ServiceException("Unable to fetch Books..",e);
+		}
+		return books;
+	}
+
+	@Override
+	public boolean addFavouriteBook(int bookId, String userName) throws ServiceException {
+		boolean success;
+		try{
+			success = dao.addFavouriteBook(bookId, userName);
+		}catch(DAOException e){
+			throw new ServiceException("Cannot add book",e);
 		}
 		return success;
 	}

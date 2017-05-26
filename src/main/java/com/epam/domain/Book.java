@@ -8,10 +8,10 @@ public class Book implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -4496583668344983089L;
-	private int id;
-	private String title;
-	private String author;
-	private BookType type;
+	protected int id;
+	protected String title;
+	protected String author;
+	protected BookType type;
 
 	public Book() {
 	}

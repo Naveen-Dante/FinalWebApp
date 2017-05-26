@@ -16,9 +16,11 @@ import com.epam.command.impl.admin.GetBooksCommand;
 import com.epam.command.impl.admin.RemoveBookCommand;
 import com.epam.command.impl.admin.UpdateBookCommand;
 import com.epam.command.impl.admin.UserCommand;
+import com.epam.command.impl.user.AddFavouriteCommand;
 import com.epam.command.impl.user.DisplayBooksCommand;
 import com.epam.command.impl.user.FavouritesCommand;
 import com.epam.command.impl.user.NewUserCommand;
+import com.epam.command.impl.user.RemoveFavourite;
 
 public class CommandProvider {
 
@@ -35,6 +37,8 @@ public class CommandProvider {
 		commandMap.put("changelanguage", new ChangeLanguageCommand());
 		commandMap.put("favourites", new FavouritesCommand());
 		commandMap.put(null, new LoadHomePage());
+		commandMap.put("addfavs", new AddFavouriteCommand());
+		commandMap.put("removefavs", new RemoveFavourite());
 		/*commandMap.put("get", new PageLoadCommand());
 		commandMap.put("login", new LoginCommand());		
 		*/

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.epam.command.Command;
-import com.epam.domain.Book;
+import com.epam.domain.UserBook;
 import com.epam.service.BookService;
 import com.epam.service.exception.ServiceException;
 import com.epam.service.impl.BookServiceImpl;
@@ -29,9 +29,8 @@ public class FavouritesCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Book> books;
-		request.setAttribute("areFavs", true);
-		HttpSession session = request.getSession(true);
+		List<UserBook> books;
+		HttpSession session = request.getSession(false);
 		String language = (String) session.getAttribute(LANGUAGE);
 		try {
 			if(session.getAttribute(BOOKS) == null){

@@ -21,7 +21,6 @@ public class RemoveBookCommand implements Command {
 	private static final String SUCCESS_MSG = "success_msg";
 	private static final String LANGUAGE = "language";
 	private static final String ID = "id";
-	private static final String BOOK_JSP = "/admin?command=home";
 	private static final String BOOK_ERROR = "book_error";
 	private static final Logger LOGGER = Logger.getLogger(BookCommand.class);
 	private static BookService service;

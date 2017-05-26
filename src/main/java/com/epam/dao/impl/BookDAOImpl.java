@@ -1,11 +1,11 @@
 package com.epam.dao.impl;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -18,8 +18,11 @@ import com.epam.domain.Book;
 import com.epam.domain.BookInfo;
 import com.epam.domain.BookType;
 import com.epam.domain.Language;
+import com.epam.domain.UserBook;
 
 public class BookDAOImpl implements BookDAO {
+
+	private static final String USERS = "users";
 
 	private static final String LANGUAGE = "language";
 
@@ -48,11 +51,6 @@ public class BookDAOImpl implements BookDAO {
 			+ "join gg4hyz6gpvflvqpc.user on user_has_book.user_id=gg4hyz6gpvflvqpc.user.id "
 			+ "where user.username=? and book.language=?";
 
-	private static final String SEARCH_QUERY = "select t.id,title,author,type from (SELECT * FROM book "
-			+ "WHERE MATCH (book.title,book.author,book.description) "
-			+ "AGAINST (?)) as t join user_has_book on t.id=user_has_book.book_id "
-			+ "join user on user_has_book.user_id=user.id where username=? and language=?";
-
 	private static final String SEARCH_BOOK_QUERY = "SELECT * FROM book "
 			+ "WHERE MATCH (book.title,book.author,book.description) " + "AGAINST (?) and language=?";
 
@@ -74,6 +72,14 @@ public class BookDAOImpl implements BookDAO {
 			+ "`title`=?, `author`=?, `description`=?, `imageurl`=? WHERE `id`=? and`language`=?";
 
 	private static final String DELETE_BOOK = "DELETE FROM `gg4hyz6gpvflvqpc`.`book` WHERE `id`=?";
+	
+	public static final String ALL_BOOK = "select group_concat(user.username) as 'users', book.* from book "+
+			"left outer join user_has_book on book.id = user_has_book.book_id "
+			+ "left outer join user on user.id = user_has_book.user_id "+
+			"group by book_id having book.language = ?";
+	
+	private static final String ADD_FAVOURITE = "insert into user_has_book values"
+				+ "((select user.id from user where username=?),?)";
 
 	private BookDAOImpl() {
 
@@ -90,8 +96,8 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public List<Book> getAllBooks(String language) throws DAOException {
-		List<Book> books = new ArrayList<Book>();
+	public List<UserBook> getAllBooks(String language) throws DAOException {
+		List<UserBook> books = new ArrayList<UserBook>();
 		Connection connection = POOL.getConnection();
 		PreparedStatement statement = null;
 		try {
@@ -99,7 +105,7 @@ public class BookDAOImpl implements BookDAO {
 			statement.setString(1, language);
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Book book = new Book();
+				UserBook book = new UserBook();
 				book.setId(resultSet.getInt(BOOK_ID));
 				book.setTitle(resultSet.getString(BOOK_TITLE));
 				book.setAuthor(resultSet.getString(BOOK_AUTHOR));
@@ -318,4 +324,56 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return success;
 	}
+
+	@Override
+	public List<UserBook> getAllBooks(String language, String userName) throws DAOException {
+		List<UserBook> books = new ArrayList<UserBook>();
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement(ALL_BOOK);
+			statement.setString(1, language);
+			ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				UserBook book = new UserBook();
+				book.setId(resultSet.getInt(BOOK_ID));
+				book.setTitle(resultSet.getString(BOOK_TITLE));
+				book.setAuthor(resultSet.getString(BOOK_AUTHOR));
+				book.setType(resultSet.getString(TYPE).equalsIgnoreCase(PAPER_BOUND) ? BookType.PAPER : BookType.EBOOK);
+				String users = resultSet.getString(USERS);
+				if(users != null){
+					book.setFavourite(Arrays.asList(users.split(",")).contains(userName));
+				}
+				else
+					book.setFavourite(false);
+				books.add(book);
+			}
+		} catch (SQLException e) {
+			throw new DAOException("Unable to retrieve data", e);
+		} finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return books;
+	}
+
+	@Override
+	public boolean addFavouriteBook(int bookId, String userName) throws DAOException {
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		boolean success = false;
+		try {
+			statement = connection.prepareStatement(ADD_FAVOURITE);
+			statement.setString(1, userName);
+			statement.setInt(2, bookId);
+			success = statement.executeUpdate() > 0 ? true : false;
+		} catch (SQLException e) {
+			throw new DAOException("Unable to Write data", e);
+		} finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return success;
+	}
+	
 }

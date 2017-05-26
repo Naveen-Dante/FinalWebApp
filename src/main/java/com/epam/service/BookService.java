@@ -5,6 +5,7 @@ import java.util.List;
 import com.epam.domain.AdminBook;
 import com.epam.domain.Book;
 import com.epam.domain.BookInfo;
+import com.epam.domain.UserBook;
 import com.epam.service.exception.ServiceException;
 
 
@@ -16,7 +17,7 @@ public interface BookService {
 
 	BookInfo getBookInfo(int bookId, String language) throws ServiceException;
 	
-	List<Book> getAllBooks(String language) throws ServiceException;
+	List<UserBook> getAllBooks(String language) throws ServiceException;
 
 	int getBooksCount() throws ServiceException;
 
@@ -27,4 +28,8 @@ public interface BookService {
 	boolean UpdateBook(BookInfo book) throws ServiceException;
 
 	boolean removeBook(int bookId, String language) throws ServiceException;
+
+	List<UserBook> getAllBooks(String language, String userName) throws ServiceException;
+
+	boolean addFavouriteBook(int bookId, String userName) throws ServiceException;
 }

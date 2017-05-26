@@ -6,6 +6,7 @@ import com.epam.dao.exception.DAOException;
 import com.epam.domain.AdminBook;
 import com.epam.domain.Book;
 import com.epam.domain.BookInfo;
+import com.epam.domain.UserBook;
 
 
 public interface BookDAO {
@@ -16,7 +17,7 @@ public interface BookDAO {
 
 	BookInfo searchBookInfo(int bookId, String language) throws DAOException;
 	
-	List<Book> getAllBooks(String language) throws DAOException;
+	List<UserBook> getAllBooks(String language) throws DAOException;
 
 	int getBooksCount() throws DAOException;
 
@@ -27,6 +28,10 @@ public interface BookDAO {
 	boolean updateBook(BookInfo book) throws DAOException;
 
 	boolean removeBook(int bookId, String language) throws DAOException;
+
+	List<UserBook> getAllBooks(String language, String userName) throws DAOException;
+
+	boolean addFavouriteBook(int bookId, String userName) throws DAOException;
 
 	
 }
