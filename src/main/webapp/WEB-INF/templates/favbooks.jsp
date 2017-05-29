@@ -30,7 +30,7 @@
 					<td><a href="/command?name=book&id=${book.id}"><button
 								class="btn btn-default" type="submit" name="button">Get
 								More Info.</button></a></td>
-					<td><a href="/FinalWebApp/command?name=removefavs&id=${book.id}"><button
+					<td><a href="/command?name=removefavs&id=${book.id}"><button
 								class="btn btn-sm btn-danger" type="button">
 								<span class="glyphicon glyphicon-minus"> </span> Remove
 							</button></a></td>

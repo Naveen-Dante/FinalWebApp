@@ -19,7 +19,7 @@ import com.mysql.cj.core.util.StringUtils;
 
 public class UpdateProfileCommand implements Command {
 
-	private static final String BASE_URL = "/FinalWebApp/command?";
+	private static final String BASE_URL = "/command?";
 	private static final String HOME_PAGE = "/";
 	private static UserService service;
 	private static final Logger LOGGER = Logger.getLogger(UpdateProfileCommand.class);
