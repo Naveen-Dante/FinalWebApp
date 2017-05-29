@@ -45,16 +45,20 @@ $(document).on("click","#loginBtn",function(){
 	$('#favs').modal('hide');
 	$('#login').modal('show');
 });
-$(document).on("click","#favsBtn",function(){
+$(document).on("click","#profileBtn", function(){
 	closeNav();
-	   if($('#isLoggedIn').length){
-		   $.get('command?name=favourites',function(){	   
-			   
-		   });
-	   }
-	   else{
-		   $('#favs').modal('show');
-	   }
+	$('#profile').modal('show');
+});
+$(document).on("click","#editProfileBtn", function () {
+	$('#fname').prop('disabled',false);
+	$('#lname').prop('disabled',false);
+	$('#phone').prop('disabled',false);
+	$('#upProfileBtn').removeClass('hide');
+	$('#editProfileBtn').addClass('hide');
+});
+$(document).on('click','#passBtn', function(){
+	closeNav();
+	$('#changepassword').modal('show');
 });
 
 function openNav() {

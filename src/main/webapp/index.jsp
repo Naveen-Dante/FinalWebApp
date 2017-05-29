@@ -43,20 +43,8 @@
 				<strong>Success!</strong> <span>"${success_message }"</span>
 			</div>
 		</c:if>
-		<%-- <c:if test="${books != null}">
-			<jsp:include page="./WEB-INF/templates/books.jsp" />
-		</c:if> --%>
+		<c:remove var="success_message"  scope="session"/>
+		
 	</div>
 </body>
-<!-- <script type="text/javascript">
-	$(document).ready(function() {
-		if ($('#books_table').length < 1) {
-			$.get('command?name=books', function() {
-				if ($('#books_table').length < 1) {
-					window.location.reload();
-				}
-			});
-		}
-	})
-</script> -->
 </html>

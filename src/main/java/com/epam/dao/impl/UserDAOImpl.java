@@ -27,6 +27,9 @@ public class UserDAOImpl implements UserDAO {
 	private static final ConnectionPool POOL = ConnectionPool.getInstance();
 	private static final String SELECT_QUERY = "SELECT * FROM user";
 	private static final String USERS_COUNT_QUERY = "SELECT count(*) AS count FROM user";
+	private static final String UPDATE_USER = "UPDATE `user` SET `firstname`= ?, `lastname`= ?, `phonenumber`= ? WHERE username=?";
+	private static final String CHANGE_PASSWORD = "update `user` set `password`=? "
+			+ "where `username`=? and `password`=?";
 
 	private UserDAOImpl() {
 
@@ -89,6 +92,49 @@ public class UserDAOImpl implements UserDAO {
 			POOL.returnConnection(connection);
 		}
 		return count;
+	}
+
+	@Override
+	public boolean updateUser(String userName, String firstName, String lastName, String phoneNumber)
+			throws DAOException {
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		int status = -1;
+		try {
+			statement = connection.prepareStatement(UPDATE_USER);
+			statement.setString(1, firstName);
+			statement.setString(2, lastName);
+			statement.setString(3, phoneNumber);
+			statement.setString(4, userName);
+			status = statement.executeUpdate();
+		} catch (SQLException e) {
+			throw new DAOException("Cannot update the user profile", e);
+			
+		} finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return status > 0 ? true : false;
+	}
+
+	@Override
+	public boolean changePassword(String userName, String password, String newPassword) throws DAOException {
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		int status = -1;
+		try {
+			statement = connection.prepareStatement(CHANGE_PASSWORD);
+			statement.setString(1, newPassword);
+			statement.setString(3, password);
+			statement.setString(2, userName);
+			status = statement.executeUpdate();
+		} catch (SQLException e) {e.printStackTrace();
+			throw new DAOException("Cannot update the user password", e);
+		} finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return status > 0 ? true : false;
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.epam.command.impl.BookCommand;
 import com.epam.command.impl.ChangeLanguageCommand;
-import com.epam.command.impl.LoadHomePage;
 import com.epam.command.impl.LoginCommand;
 import com.epam.command.impl.LogoutCommand;
 import com.epam.command.impl.SearchCommand;
@@ -17,9 +16,11 @@ import com.epam.command.impl.admin.RemoveBookCommand;
 import com.epam.command.impl.admin.UpdateBookCommand;
 import com.epam.command.impl.admin.UserCommand;
 import com.epam.command.impl.user.AddFavouriteCommand;
+import com.epam.command.impl.user.ChangePasswordCommand;
 import com.epam.command.impl.user.DisplayBooksCommand;
 import com.epam.command.impl.user.FavouritesCommand;
 import com.epam.command.impl.user.NewUserCommand;
+import com.epam.command.impl.user.UpdateProfileCommand;
 import com.epam.command.impl.user.RemoveFavourite;
 
 public class CommandProvider {
@@ -36,12 +37,13 @@ public class CommandProvider {
 		commandMap.put("search", new SearchCommand());
 		commandMap.put("changelanguage", new ChangeLanguageCommand());
 		commandMap.put("favourites", new FavouritesCommand());
-		commandMap.put(null, new LoadHomePage());
 		commandMap.put("addfavs", new AddFavouriteCommand());
 		commandMap.put("removefavs", new RemoveFavourite());
-		/*commandMap.put("get", new PageLoadCommand());
-		commandMap.put("login", new LoginCommand());		
-		*/
+		commandMap.put("profile", new UpdateProfileCommand());
+		commandMap.put("update", new UpdateProfileCommand());
+		commandMap.put("changepassword", new ChangePasswordCommand());
+		
+		
 		adminCommandMap.put("login", new DashBoardCommand());
 		adminCommandMap.put("new-book", new AddNewBookCommand());
 		adminCommandMap.put("update", new UpdateBookCommand());

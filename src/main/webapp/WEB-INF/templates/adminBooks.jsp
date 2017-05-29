@@ -9,7 +9,7 @@
 <fmt:message key="locale.information" bundle="${bundle }" var="info"></fmt:message>
 <div>
 	<div class ="col-lg-3 col-md-3 col-sm-6"><h2>Books</h2></div>
-	<div class ="col-lg-3 col-md-3 col-sm-6">
+	<div class ="col-lg-9 col-md-9 col-sm-6">
 		<button class="btn btn-md btn-default pull-right" id="newBookBtn">
 			ADD NEW BOOK
 		</button>

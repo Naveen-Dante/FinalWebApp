@@ -11,4 +11,8 @@ public interface UserDAO {
 
 	int getUserCount() throws DAOException;
 
+	boolean updateUser(String userName, String firstName, String lastName, String phoneNumber) throws DAOException;
+
+	boolean changePassword(String userName, String password, String newPassword) throws DAOException;
+
 }

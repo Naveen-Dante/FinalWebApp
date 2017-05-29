@@ -20,8 +20,8 @@
 
 
 <jsp:include page="./sidebar.jsp"></jsp:include>
-<nav class="navbar navbar-default" style="font-color: black; width: 100%"
-	role="navigation">
+<nav class="navbar navbar-default"
+	style="font-color: black; width: 100%" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -30,19 +30,21 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776;${library }</a>
+			<a class="navbar-brand" style="font-size: 20px; cursor: pointer"
+				onclick="openNav()">&#9776;${library }</a>
 		</div>
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/command?name=books">${books }</a></li>
-				<li><a class="clickable" id="favsBtn">${favs }</a></li>
+				<c:if test="${user!= null}">
+					<li><a href="/FinalWebApp/command?name=favourites">${favs }</a></li>
+				</c:if>
 			</ul>
-			<form class="navbar-form navbar-left" role="search"
-				action="command">
+			<form class="navbar-form navbar-left" role="search" action="command">
 				<div class="input-group">
-					<input type="hidden" name="name" value="search">
-					<input type="text" class="form-control" name="searchText"
+					<input type="hidden" name="name" value="search"> <input
+						type="text" class="form-control" name="searchText"
 						placeholder="${search }" required>
 					<div class="input-group-btn">
 						<button class="btn btn-default" type="submit">
@@ -58,7 +60,14 @@
 					<li><a class="clickable" id="loginBtn"><b>${login }</b> </a></li>
 				</c:if>
 				<c:if test="${user!= null }">
-					<li><a href="/command?name=profile" id="isLoggedIn">${user.firstName}</a></li>
+					<li></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">${user.firstName} <span
+							class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="clickable" id="profileBtn">Profile</a></li>
+							<li><a class="clickable" id="passBtn">Change Password</a></li>
+						</ul></li>
 					<li><a href="/command?name=logout">${logout }</a></li>
 				</c:if>
 				<li><a class="clickable" id="engBtn">English</a></li>
@@ -158,7 +167,8 @@
 				<form class="form-horizontal" action="command?name=new"
 					method="post">
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="First Name">${first }: </label>
+						<label class="control-label col-sm-4" for="First Name">${first }:
+						</label>
 						<div class="col-sm-8" data-toggle="tooltip"
 							title="Enter your First Name.">
 							<input type="text" class="form-control" name="first-name"
@@ -168,7 +178,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="Last Name">${last }: </label>
+						<label class="control-label col-sm-4" for="Last Name">${last }:
+						</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" name="last-name"
 								placeholder="Enter Surname" required pattern="[a-zA-Z]{4,}"
@@ -177,7 +188,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="User Name">${username }: </label>
+						<label class="control-label col-sm-4" for="User Name">${username }:
+						</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" name="user-name"
 								placeholder="Enter User Name" required pattern="[a-zA-Z]{4,}"
@@ -186,7 +198,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="Phone">${phone }: </label>
+						<label class="control-label col-sm-4" for="Phone">${phone }:
+						</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" name="phone"
 								pattern="[789][0-9]{9}" placeholder="Enter Phone Number"
@@ -195,7 +208,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="email">${email }: </label>
+						<label class="control-label col-sm-4" for="email">${email }:
+						</label>
 						<div class="col-sm-8">
 							<input type="email" class="form-control" name="email"
 								placeholder="Enter Email" required
@@ -214,14 +228,6 @@
 					<button type="submit" class="btn btn-success btn-block">
 						<span class="glyphicon glyphicon-off"></span>${signup }
 					</button>
-					<!--<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" name="button" value="new"
-								class="btn btn-default">
-								<fmt:message key="signup" bundle="${bundle }"></fmt:message>
-							</button>
-						</div>
-					</div>-->
 				</form>
 			</div>
 			<div class="modal-footer">
@@ -233,5 +239,131 @@
 		</div>
 	</div>
 </div>
-<input type="hidden" id="queryUrl" value="${pageContext.request.queryString }">
-<input type="hidden" id="reqUrl" value="${pageContext.request.requestURI }">
+<div class="modal fade" id="profile" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header modal-header-profile"
+				style="padding: 10px 50px;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4>
+					<span class="glyphicon glyphicon-user"></span> ${user.firstName }
+					${user.lastName }
+				</h4>
+			</div>
+			<form class="form-horizontal" action="command?name=update"
+				method="post">
+				<input type="hidden" id="queryUrl" name="queryUrl"
+					value="${pageContext.request.queryString }">
+				<div class="modal-body" style="padding: 30px 80px;">
+
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="First Name">${first }:
+						</label>
+						<div class="col-sm-8" data-toggle="tooltip"
+							title="Enter your First Name.">
+							<input type="text" class="form-control" id="fname"
+								name="first-name" value="${user.firstName }" required
+								pattern="[a-zA-Z]{4,}" oninput="setCustomValidity('')"
+								oninvalid="this.setCustomValidity('Enter Valid First Name Here(minimum 4 alphabets)')"
+								disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="Last Name">${last }:
+						</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="lname"
+								name="last-name" value="${user.lastName }" required
+								pattern="[a-zA-Z]{4,}" oninput="setCustomValidity('')"
+								oninvalid="this.setCustomValidity('Enter Valid Last Name Here(minimum 4 alphabets)')"
+								disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="User Name">${username }:
+						</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" name="user-name"
+								value="${user.userName }" disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="Phone">${phone }:
+						</label>
+						<div class="col-sm-8">
+							<input type="text" class="form-control" id="phone" name="phone"
+								pattern="[0-9]{10}" value="${user.phoneNumber }" required
+								oninput="setCustomValidity('')"
+								oninvalid="this.setCustomValidity('Enter Valid Phone Number.[10 digits, no spaces]')"
+								disabled>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="email">${email }:
+						</label>
+						<div class="col-sm-8">
+							<input type="email" class="form-control" id="email" name="email"
+								value="${user.email}" disabled>
+						</div>
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-sm btn-default"
+						id="editProfileBtn">
+						<span class="glyphicon glyphicon-edit">Edit</span>
+					</button>
+					<button type="submit"
+						class="btn btn-danger btn-default hide pull-left"
+						id="upProfileBtn">
+						<span class="glyphicon glyphicon-lock"></span> Update
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="changepassword" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header modal-header-warning"
+				style="padding: 10px 50px;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4>
+					<span class="glyphicon glyphicon-pencil"></span> Change Password
+				</h4>
+			</div>
+			<div class="modal-body" style="padding: 30px 80px;">
+				<form action="command?name=changepassword" role="form" method="post">
+					<input type="hidden" id="queryUrl" name="queryUrl"
+					value="${pageContext.request.queryString }">
+					<div class="form-group">
+						<label for="usrname"><span
+							class="glyphicon glyphicon-user"></span> ${password }</label> <input
+							type="text" class="form-control" name="password"
+							placeholder="Enter Old Password" required>
+					</div>
+					<div class="form-group">
+						<label for="psw"><span
+							class="glyphicon glyphicon-eye-open"></span> New ${password }</label> <input
+							type="password" class="form-control" name="new-password"
+							placeholder="Enter New password" required>
+					</div>
+					<button type="submit" class="btn btn-success btn-block">
+						<span class="glyphicon glyphicon-off"></span> Change Password
+					</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-danger btn-default pull-left"
+					data-dismiss="modal">
+					<span class="glyphicon glyphicon-remove"></span> ${cancel }
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<input type="hidden" id="reqUrl"
+	value="${pageContext.request.requestURI }">

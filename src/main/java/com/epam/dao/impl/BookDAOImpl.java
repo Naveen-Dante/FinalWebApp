@@ -81,6 +81,14 @@ public class BookDAOImpl implements BookDAO {
 	private static final String ADD_FAVOURITE = "insert into user_has_book values"
 				+ "((select user.id from user where username=?),?)";
 
+	private static final String FETCH_FAVOURITES = "select book.* from book "
+			+ "join user_has_book on book.id = user_has_book.book_id "
+			+ "join user on user.id = user_has_book.user_id "
+			+ "where user.username = ? and language = ?";
+
+	private static final String REMOVE_FAVOURITE = "DELETE FROM `gg4hyz6gpvflvqpc`.`user_has_book` WHERE "
+			+ "`user_id`=(select user.id from user where username=?) and`book_id`=?;";
+
 	private BookDAOImpl() {
 
 	}
@@ -364,6 +372,54 @@ public class BookDAOImpl implements BookDAO {
 		boolean success = false;
 		try {
 			statement = connection.prepareStatement(ADD_FAVOURITE);
+			statement.setString(1, userName);
+			statement.setInt(2, bookId);
+			success = statement.executeUpdate() > 0 ? true : false;
+		} catch (SQLException e) {
+			throw new DAOException("Unable to Write data", e);
+		} finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return success;
+	}
+
+	@Override
+	public List<Book> getFavourites(String language, String userName) throws DAOException {
+		List<Book> books = null;
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		try{
+			books = new ArrayList<>();
+			statement = connection.prepareStatement(FETCH_FAVOURITES);
+			statement.setString(1, userName);
+			statement.setString(2, language);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()){
+				Book book = new Book();
+				book.setId(resultSet.getInt(BOOK_ID));
+				book.setTitle(resultSet.getString(BOOK_TITLE));
+				book.setAuthor(resultSet.getString(BOOK_AUTHOR));
+				book.setType(resultSet.getString(TYPE).equalsIgnoreCase(PAPER_BOUND) ? BookType.PAPER : BookType.EBOOK);
+				books.add(book);
+			}
+		}catch (SQLException e) {
+			throw new DAOException("Can't get the details of the books.",e);
+		}finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return books;
+	}
+
+	@Override
+	public boolean removeFavouriteBook(int bookId, String userName) throws DAOException {
+		System.out.println("In DAO");
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		boolean success = false;
+		try {
+			statement = connection.prepareStatement(REMOVE_FAVOURITE);
 			statement.setString(1, userName);
 			statement.setInt(2, bookId);
 			success = statement.executeUpdate() > 0 ? true : false;

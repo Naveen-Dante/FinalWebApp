@@ -137,10 +137,23 @@
 }
 
 .modal-header-warning {
-	color: #fff;
+	color: #69faa7;
 	padding: 9px 15px;
 	border-bottom: 1px solid #eee;
 	background-color: #f8d661;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.modal-header-profile {
+	color: #69faa7;
+	padding: 9px 15px;
+	border-bottom: 1px solid #eee;
+	background-color: #91f9ab;
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;

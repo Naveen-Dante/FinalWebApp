@@ -10,7 +10,7 @@
 <fmt:message key="locale.information" bundle="${bundle }" var="info"></fmt:message>
 <fmt:message key="locale.favs" bundle="${bundle }" var="favs"></fmt:message>
 <div class="center-table" id="books_table">
-	<h2 style="align: center; padding-left: 250px">Books</h2>
+	<h2 style="align: center; padding-left: 250px">Favourites</h2>
 	<table class="table table-hover ">
 		<thead>
 			<tr>
@@ -31,8 +31,8 @@
 								class="btn btn-default" type="submit" name="button">Get
 								More Info.</button></a></td>
 					<td><a href="/FinalWebApp/command?name=removefavs&id=${book.id}"><button
-								class="btn btn-sm btn-info" type="button">
-								<span class="glyphicon glyphicon-plus"> </span> Add
+								class="btn btn-sm btn-danger" type="button">
+								<span class="glyphicon glyphicon-minus"> </span> Remove
 							</button></a></td>
 				</tr>
 			</c:forEach>

@@ -11,7 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.epam.command.Command;
-import com.epam.domain.UserBook;
+import com.epam.domain.Book;
+import com.epam.domain.User;
 import com.epam.service.BookService;
 import com.epam.service.exception.ServiceException;
 import com.epam.service.impl.BookServiceImpl;
@@ -26,22 +27,22 @@ public class FavouritesCommand implements Command {
 	public FavouritesCommand() {
 		bookService = BookServiceImpl.getInstance();
 	}
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<UserBook> books;
+		List<Book> books;
+		System.out.println("In favs");
 		HttpSession session = request.getSession(false);
 		String language = (String) session.getAttribute(LANGUAGE);
+		User user = (User) session.getAttribute("user");
 		try {
-			if(session.getAttribute(BOOKS) == null){
-				books = bookService.getAllBooks(language != null? language:"en_US");
-				if(books != null){
-					session.setAttribute(BOOKS, books);
+			if (user != null) {
+				books = bookService.getFavourites(language != null ? language : "en_US", user.getUserName());
+				if (books != null) {
+					request.setAttribute(BOOKS, books);
+					request.getRequestDispatcher("WEB-INF/jsp/favourite.jsp").forward(request, response);
 				}
-				response.sendRedirect("/");
-			}
-			else{
-				request.getRequestDispatcher("/").forward(request, response);
 			}
 		} catch (ServiceException e) {
 			LOGGER.error("Can't retrieve book details.");

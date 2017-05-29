@@ -50,4 +50,27 @@ public class UserServiceImpl implements UserService{
 		}
 		return users;
 	}
+
+	@Override
+	public boolean updateUser(String userName, String firstName, String lastName, String phoneNumber)
+			throws ServiceException {
+		boolean status = false;
+		try{
+			status =  dao.updateUser(userName, firstName, lastName, phoneNumber);
+		}catch (DAOException e) {
+			throw new ServiceException("Can't Update the User Data",e);
+		}
+		return status;
+	}
+
+	@Override
+	public boolean changePassword(String userName, String password, String newPassword) throws ServiceException {
+		boolean status = false;
+		try{
+			status =  dao.changePassword(userName, password, newPassword);
+		}catch (DAOException e) {
+			throw new ServiceException("Can't change the User password",e);
+		}
+		return status;
+	}
 }

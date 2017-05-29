@@ -149,4 +149,27 @@ public class BookServiceImpl implements BookService{
 		}
 		return success;
 	}
+
+	@Override
+	public List<Book> getFavourites(String language, String userName) throws ServiceException {
+		List<Book> books;
+		try{
+			books = dao.getFavourites(language, userName);
+		}catch (DAOException e) {
+			throw new ServiceException("Unable to fetch Books..",e);
+		}
+		return books;
+	}
+
+	@Override
+	public boolean removeFavouriteBook(int bookId, String userName) throws ServiceException {
+		System.out.println("In Service");
+		boolean success;
+		try{
+			success = dao.removeFavouriteBook(bookId, userName);
+		}catch(DAOException e){
+			throw new ServiceException("Cannot add book",e);
+		}
+		return success;
+	}
 }
