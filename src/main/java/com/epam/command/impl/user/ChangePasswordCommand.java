@@ -19,7 +19,7 @@ import com.mysql.cj.core.util.StringUtils;
 public class ChangePasswordCommand implements Command {
 
 	private static UserService service;
-	private static final String BASE_URL = "/FinalWebApp/command?";
+	private static final String BASE_URL = "/command?";
 	private static final String HOME_PAGE = "/";
 	private static final Logger LOGGER = Logger.getLogger(ChangePasswordCommand.class);
 	
