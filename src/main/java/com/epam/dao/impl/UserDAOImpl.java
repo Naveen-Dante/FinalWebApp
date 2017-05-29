@@ -62,6 +62,7 @@ public class UserDAOImpl implements UserDAO {
 					user.setEmail(rs.getString(EMAIL));
 					user.setType(rs.getInt(IS_ADMIN) == 0 ? false : true);
 					user.setPhoneNumber(new BigInteger(rs.getString(PHONENUMBER)));
+					users.add(user);
 				}
 
 			}
