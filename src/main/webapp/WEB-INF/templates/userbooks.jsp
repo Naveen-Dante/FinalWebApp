@@ -33,7 +33,7 @@
 					<td>
 						<c:choose>
 							<c:when test="${book.favourite == false }">
-								<a href="/FinalWebApp/command?name=addfavs&id=${book.id}"><button class="btn btn-sm btn-info" type="button"><span class="glyphicon glyphicon-plus">
+								<a href="/command?name=addfavs&id=${book.id}"><button class="btn btn-sm btn-info" type="button"><span class="glyphicon glyphicon-plus">
 								</span> Add</button></a>
 							</c:when>
 							<c:otherwise>
