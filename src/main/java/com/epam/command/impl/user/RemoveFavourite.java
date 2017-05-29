@@ -37,7 +37,7 @@ public class RemoveFavourite implements Command {
 			if(status){
 				
 			}
-			response.sendRedirect("/FinalWebApp/command?name=favourites");
+			response.sendRedirect("/command?name=favourites");
 			
 		}catch (ServiceException e) {
 			// TODO: handle exception

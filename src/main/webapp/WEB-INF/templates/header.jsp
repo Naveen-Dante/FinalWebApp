@@ -38,7 +38,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="/command?name=books">${books }</a></li>
 				<c:if test="${user!= null}">
-					<li><a href="/FinalWebApp/command?name=favourites">${favs }</a></li>
+					<li><a href="/command?name=favourites">${favs }</a></li>
 				</c:if>
 			</ul>
 			<form class="navbar-form navbar-left" role="search" action="command">

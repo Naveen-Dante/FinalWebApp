@@ -34,7 +34,7 @@ public class AddFavouriteCommand implements Command {
 		try{
 			status = service.addFavouriteBook(bookId, user.getUserName());
 			if(status){
-				response.sendRedirect("/FinalWebApp/command?name=books");
+				response.sendRedirect("/command?name=books");
 			}
 			else
 				request.getRequestDispatcher("WEB_INF/jsp/books.jsp").forward(request, response);

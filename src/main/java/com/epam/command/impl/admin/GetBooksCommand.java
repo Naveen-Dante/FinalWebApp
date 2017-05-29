@@ -21,7 +21,7 @@ public class GetBooksCommand implements Command {
 	private static BookService bookService;
 	private static final String ALL_BOOKS = "allBooks";
 	private static final String TOTAL_BOOKS = "totalBooks";
-	private static final String ADMIN_PAGE = "WEB-INF/jsp/admin.jsp";
+	private static final String ADMIN_PAGE = "WEB-INF/jsp/adminBooks.jsp";
 	private static final Logger LOGGER = Logger.getLogger(GetBooksCommand.class);
 	
 	public GetBooksCommand(){
@@ -36,7 +36,7 @@ public class GetBooksCommand implements Command {
 		try{
 			int totalBooksPresent = bookService.getBooksCount();
 			books = bookService.getAllBooks();
-			session.setAttribute(ALL_BOOKS, books);
+			request.setAttribute(ALL_BOOKS, books);
 			session.setAttribute(TOTAL_BOOKS, totalBooksPresent);
 			request.getRequestDispatcher(ADMIN_PAGE).forward(request, response);
 		}catch (ServiceException e) {
