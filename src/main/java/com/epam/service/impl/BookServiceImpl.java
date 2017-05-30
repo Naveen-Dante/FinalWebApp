@@ -172,4 +172,26 @@ public class BookServiceImpl implements BookService{
 		}
 		return success;
 	}
+
+	@Override
+	public List<Book> getTopBooks(String language) throws ServiceException {
+		List<Book> books;
+		try{
+			books = dao.getTopBooks(language);
+		}catch (DAOException e) {
+			throw new ServiceException("Unable to fetch Books..",e);
+		}
+		return books;
+	}
+
+	@Override
+	public Book getTopBook() throws ServiceException {
+		Book book;
+		try{
+			book = dao.getTopBooks();
+		}catch (DAOException e) {
+			throw new ServiceException("Unable to fetch Most Rated Book..",e);
+		}
+		return book;
+	}
 }

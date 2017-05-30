@@ -36,4 +36,8 @@ public interface BookService {
 	List<Book> getFavourites(String language, String userName) throws ServiceException;
 
 	boolean removeFavouriteBook(int bookId, String userName) throws ServiceException;
+
+	List<Book> getTopBooks(String language) throws ServiceException;
+
+	Book getTopBook() throws ServiceException;
 }

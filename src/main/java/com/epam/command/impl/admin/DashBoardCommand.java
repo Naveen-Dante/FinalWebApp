@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.epam.command.Command;
+import com.epam.domain.Book;
 import com.epam.domain.User;
 import com.epam.service.BookService;
 import com.epam.service.UserService;
@@ -19,6 +20,8 @@ import com.epam.service.impl.UserServiceImpl;
 
 public class DashBoardCommand implements Command {
 
+	private static final String HOME = "/";
+	private static final String TOP_BOOK = "topBook";
 	private static final String TOTAL_USERS = "totalUsers";
 	private static final String TOTAL_BOOKS = "totalBooks";
 	private static final String ADMIN_PAGE = "WEB-INF/jsp/admin.jsp";
@@ -40,11 +43,13 @@ public class DashBoardCommand implements Command {
 			if (admin.isAdmin()) {
 				int totalBooksPresent = bookService.getBooksCount();
 				int totalUsersPresent = userService.getUserCount();
+				Book book = bookService.getTopBook();
 				session.setAttribute(TOTAL_BOOKS, totalBooksPresent);
 				session.setAttribute(TOTAL_USERS, totalUsersPresent);
+				session.setAttribute(TOP_BOOK, book);
 				request.getRequestDispatcher(ADMIN_PAGE).forward(request, response);
 			} else {
-				response.sendRedirect("/");
+				response.sendRedirect(HOME);
 			}
 		} catch (ServiceException e) {
 			LOGGER.error("Cannot Load Admin Portal",e);

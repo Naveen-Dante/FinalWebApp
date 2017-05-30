@@ -55,7 +55,7 @@
 						<div class="circle-tile-description text-faded">Most Popular
 							Book</div>
 						<div class="circle-tile-number text-faded">
-							Book Name <span id="sparklineB"></span>
+							${topBook.title } <span id="sparklineB"></span>
 						</div>
 						<a href="#" class="circle-tile-footer">More Info <i
 							class="fa fa-chevron-circle-right"></i></a>

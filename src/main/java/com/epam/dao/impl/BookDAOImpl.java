@@ -88,6 +88,17 @@ public class BookDAOImpl implements BookDAO {
 
 	private static final String REMOVE_FAVOURITE = "DELETE FROM `gg4hyz6gpvflvqpc`.`user_has_book` WHERE "
 			+ "`user_id`=(select user.id from user where username=?) and`book_id`=?;";
+	
+	private static final String MOST_BOOKMARKED = "select * , count(user_has_book.book_id) as cnt from book "
+			+ "left join user_has_book on book.id = user_has_book.book_id "
+			+ "group by user_has_book.book_id "
+			+ "having cnt > 0 and language = ? "
+			+ "order by cnt desc limit 20";
+	
+	private static final String MOST_BOOKMARKED_BOOK = "select * from book "
+			+ "where book.id = ( select book_id from user_has_book "
+			+ "group by user_has_book.book_id "
+			+ "order by count(*) desc limit 1)";
 
 	private BookDAOImpl() {
 
@@ -414,7 +425,6 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public boolean removeFavouriteBook(int bookId, String userName) throws DAOException {
-		System.out.println("In DAO");
 		Connection connection = POOL.getConnection();
 		PreparedStatement statement = null;
 		boolean success = false;
@@ -431,5 +441,58 @@ public class BookDAOImpl implements BookDAO {
 		}
 		return success;
 	}
+
+	@Override
+	public List<Book> getTopBooks(String language) throws DAOException {
+		List<Book> books = null;
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		try{
+			statement = connection.prepareStatement(MOST_BOOKMARKED);
+			statement.setString(1, language);
+			ResultSet resultSet = statement.executeQuery();
+			books = resultSet == null? null: new ArrayList<>();
+			while(resultSet.next()){
+				Book book = new Book();
+				book.setId(resultSet.getInt(BOOK_ID));
+				book.setTitle(resultSet.getString(BOOK_TITLE));
+				book.setAuthor(resultSet.getString(BOOK_AUTHOR));
+				book.setType(resultSet.getString(TYPE).equalsIgnoreCase(PAPER_BOUND) ? BookType.PAPER : BookType.EBOOK);
+				books.add(book);
+			}
+		}catch (SQLException e) {
+			throw new DAOException("Can't get the details of the books.",e);
+		}finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return books;
+	}
+
+	@Override
+	public Book getTopBooks() throws DAOException {
+		Book book = null;
+		Connection connection = POOL.getConnection();
+		PreparedStatement statement = null;
+		try{
+			statement = connection.prepareStatement(MOST_BOOKMARKED_BOOK);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()){
+				book = new Book();
+				book.setId(resultSet.getInt(BOOK_ID));
+				book.setTitle(resultSet.getString(BOOK_TITLE));
+				book.setAuthor(resultSet.getString(BOOK_AUTHOR));
+				book.setType(resultSet.getString(TYPE).equalsIgnoreCase(PAPER_BOUND) ? BookType.PAPER : BookType.EBOOK);
+			}
+		}catch (SQLException e) {
+			throw new DAOException("Can't get the details of the books.",e);
+		}finally {
+			Utility.closeStatement(statement);
+			POOL.returnConnection(connection);
+		}
+		return book;
+	}
+	
+	
 	
 }

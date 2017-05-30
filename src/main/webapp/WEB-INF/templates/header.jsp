@@ -37,6 +37,7 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="/command?name=books">${books }</a></li>
+				<li><a href = "/command?name=top">Top Books</a></li>
 				<c:if test="${user!= null}">
 					<li><a href="/command?name=favourites">${favs }</a></li>
 				</c:if>

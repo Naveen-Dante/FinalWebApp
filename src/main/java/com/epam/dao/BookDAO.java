@@ -37,5 +37,9 @@ public interface BookDAO {
 
 	boolean removeFavouriteBook(int bookId, String userName) throws DAOException;
 
+	List<Book> getTopBooks(String language) throws DAOException;
+
+	Book getTopBooks() throws DAOException;
+
 	
 }

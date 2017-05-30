@@ -22,6 +22,7 @@ import com.epam.command.impl.user.FavouritesCommand;
 import com.epam.command.impl.user.NewUserCommand;
 import com.epam.command.impl.user.UpdateProfileCommand;
 import com.epam.command.impl.user.RemoveFavourite;
+import com.epam.command.impl.user.TopBooksCommand;
 
 public class CommandProvider {
 
@@ -42,6 +43,7 @@ public class CommandProvider {
 		commandMap.put("profile", new UpdateProfileCommand());
 		commandMap.put("update", new UpdateProfileCommand());
 		commandMap.put("changepassword", new ChangePasswordCommand());
+		commandMap.put("top", new TopBooksCommand());
 		
 		
 		adminCommandMap.put("login", new DashBoardCommand());
