@@ -20,25 +20,23 @@
 	cursor: pointer;
 }
 </style>
-<div class="container">
-	<table class="table table-bordered table-inverse">
-		<thead>
+<table class="table table-bordered table-inverse">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>User Name</th>
+			<th>Email ID</th>
+			<th>Phone Number</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${allUser}" var="user">
 			<tr>
-				<th>Name</th>
-				<th>User Name</th>
-				<th>Email ID</th>
-				<th>Phone Number</th>
+				<td>${user.firstName}${user.lastName}</td>
+				<td>${user.userName}</td>
+				<td>${user.email}</td>
+				<td>${user.phoneNumber}</td>
 			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${allUser}" var="user">
-				<tr>
-					<td>${user.firstName} ${user.lastName}</td>
-					<td>${user.userName}</td>
-					<td>${user.email}</td>
-					<td>${user.phoneNumber}</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-</div>
+		</c:forEach>
+	</tbody>
+</table>

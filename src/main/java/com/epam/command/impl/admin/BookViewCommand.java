@@ -33,7 +33,7 @@ public class BookViewCommand implements Command {
 		String language = request.getParameter(LANGUAGE);
 		int bookId = Integer.parseInt(request.getParameter(ID));
 		try {
-			BookInfo searchedBook = service.getBookInfo(bookId, language.equalsIgnoreCase("english")? "en_US": "es_ES" );
+			BookInfo searchedBook = service.getBookInfo(bookId, language == null || language.equalsIgnoreCase("english")? "en_US": "es_ES" );
 			if(searchedBook != null){
 				request.setAttribute(BOOK, searchedBook);
 				request.setAttribute(BOOK_ERROR, false);
