@@ -29,16 +29,14 @@
 								class="btn btn-default" type="submit" name="button">Get
 								More Info.</button></a></td>
 					<td>
-						<c:choose>
-							<c:when test="${book.favourite == false }">
+							<c:if test="${book.favourite == false }">
 								<a href="/command?name=addfavs&id=${book.id}"><button class="btn btn-sm btn-info" type="button"><span class="glyphicon glyphicon-plus">
 								</span> Add</button></a>
-							</c:when>
-							<c:otherwise>
+							</c:if>
+							<c:if test="${book.favourite == true }">
 								<a><button class="btn btn-sm btn-info" type="button" disabled><span class="glyphicon glyphicon-plus">
 								</span> Added</button></a>
-							</c:otherwise>
-						</c:choose>
+							</c:if>
 					</td>
 				</tr>
 			</c:forEach>
