@@ -22,7 +22,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <c:if test="${sessionScope.get('user') != null && sessionScope.get('user').isAdmin() == true}">
-    <c:redirect url="/admin?command=books"/>
+    <c:redirect url="/admin?command=login"/>
 </c:if>
 <title>JSP Page</title>
 <link href="./css/style.css" rel="stylesheet">

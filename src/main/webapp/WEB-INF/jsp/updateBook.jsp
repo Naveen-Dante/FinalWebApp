@@ -14,6 +14,9 @@
 <html lang=${language }>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<c:if test="${sessionScope.get('user') == null || sessionScope.get('user').isAdmin() == false}">
+    <c:redirect url="/"/>
+</c:if>
 <script src="https://use.fontawesome.com/5794b2dac0.js"></script>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -37,30 +40,30 @@
 				<div class="form-group">
 					<label for="title">Title:</label> <input type="text"
 						class="form-control" name="title" id="title"
-						value="${book.title }">
+						value="${book.title }" disabled>
 				</div>
 				<div class="form-group">
 					<label for="author">Author:</label> <input type="text"
 						class="form-control" name="author" id="author"
-						value="${book.author }">
+						value="${book.author }" disabled>
 				</div>
 				<div class="form-group">
 					<label for="imageurl">ImageUrl:</label> <input type="text"
 						class="form-control" name="imageurl" id="imageurl"
-						value="${book.imageUrl }">
+						value="${book.imageUrl }" disabled>
 				</div>
 				<div class="form-group">
 					<label for="description">Description:</label>
-					<textarea rows="10" class="form-control" name="description"
-						id="description">${book.description }</textarea>
+					<textarea name="description" rows="10" class="form-control" name="description"
+						id="description" disabled>${book.description }</textarea>
 				</div>
 				<input type="hidden" name="id" value="${book.id }"> <input
 					type="hidden" name="language" value="${book.language }">
 				<div class="row">
-					<button type="submit" class="btn btn-default pull-left">Submit</button>
-					<a
-						href="/admin?command=remove-book&id=${book.id }&language=${book.language }"><button
-							type="button" class="btn btn-default pull-right">Delete
+					<button type="submit" class="btn btn-success hide pull-left" name="updateBtn">Submit</button>
+					<button type="button" class="btn btn-info pull-left" name="editBookBtn"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+					<a href="/admin?command=remove-book&id=${book.id }&language=${book.language }"><button
+							type="button" class="btn btn-danger pull-right">Delete
 							Book</button></a>
 				</div>
 			</form>

@@ -21,6 +21,9 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<c:if test="${sessionScope.get('user') == null}">
+    <c:redirect url="/"/>
+</c:if>
 <title>Books</title>
 <link href="./css/style.css" rel="stylesheet">
 <script src="./js/main.js"></script>
@@ -43,15 +46,4 @@
 		<jsp:include page="../templates/favbooks.jsp"></jsp:include>
 	</div>
 </body>
-<script type="text/javascript">
-	$(document).ready(function() {
-		if ($('#books_table').length < 1) {
-			$.get('command?name=books', function() {
-				if ($('#books_table').length < 1) {
-					window.location.reload();
-				}
-			});
-		}
-	})
-</script>
 </html>

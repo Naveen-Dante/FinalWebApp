@@ -48,15 +48,4 @@
 		</c:if>
 	</div>
 </body>
-<script type="text/javascript">
-	$(document).ready(function() {
-		if ($('#books_table').length < 1) {
-			$.get('command?name=books', function() {
-				if ($('#books_table').length < 1) {
-					window.location.reload();
-				}
-			});
-		}
-	})
-</script>
 </html>

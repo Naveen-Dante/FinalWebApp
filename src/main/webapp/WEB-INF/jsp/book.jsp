@@ -45,10 +45,6 @@
 		</c:if>
 		<c:if test="${book_error == false }">
 			<div class="container" style="padding-top: 100px">
-				<%-- <p>
-			<fmt:message key="welcome" bundle="${ bundle}"></fmt:message>
-			${user.firstName}.
-		</p> --%>
 				<div class="panel panel-success">
 					<div class="panel-heading">
 						<h3>${book.title}</h3>

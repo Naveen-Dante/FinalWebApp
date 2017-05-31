@@ -14,6 +14,9 @@
 <html lang=${language }>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<c:if test="${sessionScope.get('user') == null || sessionScope.get('user').isAdmin() == false}">
+    <c:redirect url="/"/>
+</c:if>
 <script src="https://use.fontawesome.com/5794b2dac0.js"></script>
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -31,6 +34,7 @@
 	<jsp:include page="../templates/adminNavbar.jsp"></jsp:include>
 	<div class="main">
 		<h1 style="font-weight: bold;">DashBoard<span style="font-size: 18px; font-weight: lighter;"> Control Panel</span></h1>
+		<jsp:include page="../templates/admintiles.jsp"></jsp:include>
 		<jsp:include page="../templates/adminBooks.jsp"></jsp:include>
 	</div>
 	

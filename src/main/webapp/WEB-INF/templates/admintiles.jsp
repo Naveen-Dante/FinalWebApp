@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-3 col-sm-6">
 				<div class="circle-tile">
-					<a href="#">
+					<a href="/admin?command=users">
 						<div class="circle-tile-heading dark-blue">
 							<i class="fa fa-users fa-fw fa-3x"></i>
 						</div>
@@ -31,7 +31,7 @@
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6">
 				<div class="circle-tile">
-					<a href="#">
+					<a href="/admin?command=books">
 						<div class="circle-tile-heading orange">
 							<i class="fa fa-book fa-fw fa-3x"></i>
 						</div>
@@ -46,7 +46,7 @@
 			</div>
 			<div class="col-lg-3 col-md-3 col-sm-6">
 				<div class="circle-tile">
-					<a href="#">
+					<a href="/admin?command=book&id=${topBook.id}">
 						<div class="circle-tile-heading blue">
 							<i class="fa fa-bookmark fa-fw fa-3x"></i>
 						</div>
@@ -62,23 +62,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-3 col-sm-6">
-				<div class="circle-tile">
-					<a href="#">
-						<div class="circle-tile-heading red">
-							<i class="fa fa-shopping-cart fa-fw fa-3x"></i>
-						</div>
-					</a>
-					<div class="circle-tile-content red">
-						<div class="circle-tile-description text-faded">Orders</div>
-						<div class="circle-tile-number text-faded">
-							24 <span id="sparklineC"></span>
-						</div>
-						<a href="#" class="circle-tile-footer">More Info <i
-							class="fa fa-chevron-circle-right"></i></a>
-					</div>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 	<!-- page-wrapper END-->

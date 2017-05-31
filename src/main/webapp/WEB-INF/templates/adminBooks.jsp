@@ -39,7 +39,7 @@
 				<td>${book.title}</td>
 				<td>${book.author}</td>
 				<td>${book.language }</td>
-				<td><a href="admin?command=book&id=${book.id}&language=${book.language}"><button
+				<td><a href="/admin?command=book&id=${book.id}&language=${book.language}"><button
 							class="btn btn-default" type="submit" name="button">Get
 							More Info.</button></a></td>
 			</tr>
