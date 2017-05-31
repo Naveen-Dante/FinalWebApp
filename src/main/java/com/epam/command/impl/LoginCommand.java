@@ -17,6 +17,7 @@ import com.epam.service.impl.LoginServiceImpl;
 
 public class LoginCommand implements Command {
 
+	private static final String HOME = "/";
 	private static final String ADMIN = "/admin?command=login";
 	private static final String REDIRECT = "/command?name=login";
 	private static final String IS_LOGGED_IN = "isLoggedIn";
@@ -44,11 +45,11 @@ public class LoginCommand implements Command {
 				response.sendRedirect(ADMIN);
 			}
 			else{
-				request.getRequestDispatcher("/").forward(request, response);
+				request.getRequestDispatcher(HOME).forward(request, response);
 			}
 		} else {
 			if (userName == null || password == null) {
-				response.sendRedirect("/");
+				response.sendRedirect(HOME);
 			} else {
 				User user;
 				try {
@@ -57,7 +58,7 @@ public class LoginCommand implements Command {
 						errorMsg = "Invalid UserName or Password!";
 						request.setAttribute(ERROR_MESSAGE, errorMsg);
 						request.setAttribute(ERROR, true);
-						request.getRequestDispatcher("/").forward(request, response);
+						request.getRequestDispatcher(HOME).forward(request, response);
 					} else {
 						session.setAttribute(USER, user);
 						session.setAttribute(IS_LOGGED_IN, true);

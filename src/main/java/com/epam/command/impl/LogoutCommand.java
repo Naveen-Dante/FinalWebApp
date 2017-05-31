@@ -11,6 +11,7 @@ import com.epam.command.Command;
 
 public class LogoutCommand implements Command {
 
+	private static final String HOME = "/";
 	private static final String IS_LOGGED_IN = "isLoggedIn";
 	private static final String USER = "user";
 
@@ -19,7 +20,7 @@ public class LogoutCommand implements Command {
 		HttpSession session = request.getSession();
 		session.removeAttribute(USER);
 		session.removeAttribute(IS_LOGGED_IN);
-		response.sendRedirect("/");
+		response.sendRedirect(HOME);
 	}
 
 }

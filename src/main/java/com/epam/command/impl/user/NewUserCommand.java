@@ -18,6 +18,7 @@ import com.epam.service.impl.NewUserServiceImpl;
 import com.mysql.cj.core.util.StringUtils;
 
 public class NewUserCommand implements Command {
+	private static final String HOME = "/";
 	private static final String REDIRECT = "/command?name=new";
 	private static final String USER_SUCCESSFULLY_CREATED = "User Successfully Created.";
 	private static final String SUCCESS_MESSAGE = "success_message";
@@ -43,14 +44,14 @@ public class NewUserCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (!isCompleteForm(request)) {
-			response.sendRedirect("/");
+			response.sendRedirect(HOME);
 		} else {
 			HttpSession session = request.getSession(true);
 			if (session.getAttribute(SUCCESS_MESSAGE) != null) {
 				String msg = (String) session.getAttribute(SUCCESS_MESSAGE);
 				session.removeAttribute(SUCCESS_MESSAGE);
 				request.setAttribute(SUCCESS_MESSAGE, msg);
-				request.getRequestDispatcher("/").forward(request, response);
+				request.getRequestDispatcher(HOME).forward(request, response);
 			} else {
 
 				User user = new User();
@@ -65,7 +66,7 @@ public class NewUserCommand implements Command {
 				String errorMsg = null;
 				response.setContentType(TEXT_HTML);
 				if (!user.isValid() || password == null) {
-					response.sendRedirect("/");
+					response.sendRedirect(HOME);
 				} else {
 					try {
 						success = service.addNewUser(user, password);
@@ -73,7 +74,7 @@ public class NewUserCommand implements Command {
 							errorMsg = USER_NAME_NOT_AVAILABLE_PLEASE_TRY_AGAIN;
 							request.setAttribute(ERROR, true);
 							request.setAttribute(ERROR_MESSAGE, errorMsg);
-							request.getRequestDispatcher("/").forward(request, response);
+							request.getRequestDispatcher(HOME).forward(request, response);
 						} else {
 							session.setAttribute(USER, user);
 							session.setAttribute(IS_LOGGED_IN, true);

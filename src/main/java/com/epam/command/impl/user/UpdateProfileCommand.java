@@ -19,6 +19,11 @@ import com.mysql.cj.core.util.StringUtils;
 
 public class UpdateProfileCommand implements Command {
 
+	private static final String PHONE = "phone";
+	private static final String LAST_NAME = "last-name";
+	private static final String FIRST_NAME = "first-name";
+	private static final String QUERY_URL = "queryUrl";
+	private static final String USER = "user";
 	private static final String BASE_URL = "/command?";
 	private static final String HOME_PAGE = "/";
 	private static UserService service;
@@ -31,11 +36,11 @@ public class UpdateProfileCommand implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		String requestUrl = generateURL(request.getParameter("queryUrl"));
-		String firstName = request.getParameter("first-name");
-		String lastName = request.getParameter("last-name");
-		String phoneNumber = request.getParameter("phone");
+		User user = (User) session.getAttribute(USER);
+		String requestUrl = generateURL(request.getParameter(QUERY_URL));
+		String firstName = request.getParameter(FIRST_NAME);
+		String lastName = request.getParameter(LAST_NAME);
+		String phoneNumber = request.getParameter(PHONE);
 		if (verify(firstName, lastName, phoneNumber)) {
 			try {
 				boolean status = service.updateUser(user.getUserName(), firstName, lastName, phoneNumber);
@@ -43,7 +48,7 @@ public class UpdateProfileCommand implements Command {
 					user.setFirstName(firstName);
 					user.setLastName(lastName);
 					user.setPhoneNumber(new BigInteger(phoneNumber));
-					session.setAttribute("user", user);
+					session.setAttribute(USER, user);
 					System.out.println(requestUrl);
 					response.sendRedirect(requestUrl);
 				}

@@ -31,14 +31,10 @@ public class RemoveBookCommand implements Command {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String language = request.getParameter(LANGUAGE);
-		System.out.println(language);
 		int bookId = Integer.parseInt(request.getParameter(ID));
-		System.out.println(bookId);
 		boolean success = false;
 		try {
-			System.out.println("In loop");
 			success = service.removeBook(bookId, language);
 			if (success) {
 				request.setAttribute(SUCCESS_MSG, BOOK_DELETED);

@@ -18,6 +18,7 @@ import com.epam.command.Command;
  */
 public class ChangeLanguageCommand implements Command {
 
+	private static final String HOME = "/";
 	private static final String PAGE_LANG = "lang";
 	private static final String LANGUAGE = "language";
 
@@ -30,7 +31,7 @@ public class ChangeLanguageCommand implements Command {
 		HttpSession session = request.getSession(true);
 		String language = request.getParameter(PAGE_LANG);
 		session.setAttribute(LANGUAGE, language);
-		request.getRequestDispatcher("/").forward(request, response);
+		request.getRequestDispatcher(HOME).forward(request, response);
 	}
 
 }

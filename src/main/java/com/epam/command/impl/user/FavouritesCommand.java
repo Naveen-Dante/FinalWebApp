@@ -19,6 +19,9 @@ import com.epam.service.impl.BookServiceImpl;
 
 public class FavouritesCommand implements Command {
 
+	private static final String FAVOURITE_JSP = "WEB-INF/jsp/favourite.jsp";
+	private static final String EN_US = "en_US";
+	private static final String USER = "user";
 	private static final String LANGUAGE = "language";
 	private static BookService bookService;
 	private static final Logger LOGGER = Logger.getLogger(DisplayBooksCommand.class);
@@ -32,16 +35,15 @@ public class FavouritesCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		List<Book> books;
-		System.out.println("In favs");
 		HttpSession session = request.getSession(false);
 		String language = (String) session.getAttribute(LANGUAGE);
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(USER);
 		try {
 			if (user != null) {
-				books = bookService.getFavourites(language != null ? language : "en_US", user.getUserName());
+				books = bookService.getFavourites(language != null ? language : EN_US, user.getUserName());
 				if (books != null) {
 					request.setAttribute(BOOKS, books);
-					request.getRequestDispatcher("WEB-INF/jsp/favourite.jsp").forward(request, response);
+					request.getRequestDispatcher(FAVOURITE_JSP).forward(request, response);
 				}
 			}
 		} catch (ServiceException e) {

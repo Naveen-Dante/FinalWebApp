@@ -17,6 +17,9 @@ import com.epam.service.impl.BookServiceImpl;
 
 public class RemoveFavourite implements Command {
 
+	private static final String FAVOURITES_PAGE = "/command?name=favourites";
+	private static final String ID = "id";
+	private static final String USER = "user";
 	private static BookService service;
 	private static volatile Logger LOGGER = Logger.getLogger(RemoveFavourite.class);
 	
@@ -27,8 +30,8 @@ public class RemoveFavourite implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		int bookId = Integer.parseInt(request.getParameter("id").trim());
+		User user = (User) session.getAttribute(USER);
+		int bookId = Integer.parseInt(request.getParameter(ID).trim());
 		boolean status = false;
 		try{
 			System.out.println(bookId);
@@ -37,7 +40,7 @@ public class RemoveFavourite implements Command {
 			if(status){
 				
 			}
-			response.sendRedirect("/command?name=favourites");
+			response.sendRedirect(FAVOURITES_PAGE);
 			
 		}catch (ServiceException e) {
 			// TODO: handle exception

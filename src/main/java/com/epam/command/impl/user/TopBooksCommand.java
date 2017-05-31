@@ -18,6 +18,8 @@ import com.epam.service.impl.BookServiceImpl;
 
 public class TopBooksCommand implements Command {
 
+	private static final String TOP_BOOKS_JSP = "WEB-INF/jsp/topBooks.jsp";
+	private static final String BOOKS = "books";
 	private static final Logger LOGGER = Logger.getLogger(TopBooksCommand.class);
 	private static final String LANGUAGE = "language";
 	private static final String DEFAULT_LANGUAGE = "en_US";
@@ -38,9 +40,9 @@ public class TopBooksCommand implements Command {
 		try{
 			books = service.getTopBooks(language);
 			if(books != null){
-				request.setAttribute("books", books);
+				request.setAttribute(BOOKS, books);
 			}
-			request.getRequestDispatcher("WEB-INF/jsp/topBooks.jsp").forward(request, response);
+			request.getRequestDispatcher(TOP_BOOKS_JSP).forward(request, response);
 		}catch (ServiceException e) {
 			LOGGER.error("Can't retrieve top Books..");
 		}

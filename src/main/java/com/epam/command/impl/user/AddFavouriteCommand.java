@@ -17,6 +17,10 @@ import com.epam.service.impl.BookServiceImpl;
 
 public class AddFavouriteCommand implements Command {
 
+	private static final String BOOKS_PAGE_JSP = "WEB_INF/jsp/books.jsp";
+	private static final String BOOKS_PAGE = "/command?name=books";
+	private static final String ID = "id";
+	private static final String USER = "user";
 	private static BookService service;
 	private static final Logger LOGGER = Logger.getLogger(AddFavouriteCommand.class);
 	
@@ -28,16 +32,16 @@ public class AddFavouriteCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
-		User user = (User) session.getAttribute("user");
-		int bookId = Integer.parseInt(request.getParameter("id"));
+		User user = (User) session.getAttribute(USER);
+		int bookId = Integer.parseInt(request.getParameter(ID));
 		boolean status = false;
 		try{
 			status = service.addFavouriteBook(bookId, user.getUserName());
 			if(status){
-				response.sendRedirect("/command?name=books");
+				response.sendRedirect(BOOKS_PAGE);
 			}
 			else
-				request.getRequestDispatcher("WEB_INF/jsp/books.jsp").forward(request, response);
+				request.getRequestDispatcher(BOOKS_PAGE_JSP).forward(request, response);
 		}catch (ServiceException e) {
 			// TODO: handle exception
 			LOGGER.error("Unable to create favourites....");

@@ -19,6 +19,7 @@ import com.epam.service.impl.BookServiceImpl;
 
 public class DisplayBooksCommand implements Command {
 
+	private static final String USER = "user";
 	private static final String HOME_PAGE = "/";
 	private static final String BOOKS_JSP = "WEB-INF/jsp/books.jsp";
 	private static final String DEFAULT_LANGUAGE = "en_US";
@@ -36,7 +37,7 @@ public class DisplayBooksCommand implements Command {
 		HttpSession session = request.getSession(true);
 		String language = (String) session.getAttribute(LANGUAGE) != null ? (String) session.getAttribute(LANGUAGE)
 				: DEFAULT_LANGUAGE;
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute(USER);
 		List<UserBook> books = null;
 		try {
 			if(user != null){

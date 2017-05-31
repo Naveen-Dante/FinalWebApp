@@ -39,9 +39,6 @@ public class UserCommand implements Command {
 				int totalUsersPresent = userService.getUserCount();
 				users = userService.getUsers();
 				request.setAttribute(ALL_USERS, users);
-				for (User user : users) {
-					System.out.println(user.toString());
-				}
 				session.setAttribute(TOTAL_USERS, totalUsersPresent);
 				request.getRequestDispatcher(ADMIN_PAGE).forward(request, response);
 			} else {

@@ -20,10 +20,18 @@ import com.mysql.cj.core.util.StringUtils;
 
 public class AddNewBookCommand implements Command {
 
+	private static final String SELECT_LANGUAGE = "select-language";
+	private static final String DESCRIPTION = "description";
+	private static final String IMAGE_URL = "imageurl";
+	private static final String PAPER = "paper";
+	private static final String TYPE = "opttype";
+	private static final String AUTHOR = "author";
+	private static final String TITLE = "title";
+	private static final String ADMIN_HOME_PAGE = "/admin?command=home";
+	private static final String ADMIN_BOOKS_PAGE = "WEB-INF/jsp/adminBooks.jsp";
 	private static final Logger LOGGER = Logger.getLogger(BookCommand.class);
 	private static final String SUCCESS_MESSAGE = "Added new Book Successfully..";
-	private static final String ERROR = null;
-	private static final String ERROR_MESSAGE = null;
+	private static final String ERROR_MESSAGE = "Can't add the Book.";
 	private static final String REDIRECT = "/admin?command=new-book";
 	private static BookService service;
 
@@ -39,28 +47,26 @@ public class AddNewBookCommand implements Command {
 			String msg = (String) session.getAttribute(SUCCESS_MESSAGE);
 			session.removeAttribute(SUCCESS_MESSAGE);
 			request.setAttribute(SUCCESS_MESSAGE, msg);
-			request.getRequestDispatcher("WEB-INF/jsp/admin.jsp").forward(request, response);
+			request.getRequestDispatcher(ADMIN_BOOKS_PAGE).forward(request, response);
 		} else if (!isCompleteForm(request)) {
-			response.sendRedirect("/admin?command=login");
+			response.sendRedirect(ADMIN_HOME_PAGE);
 		} else {
 			BookInfo book = new BookInfo();
-			book.setTitle(request.getParameter("title"));
-			book.setAuthor(request.getParameter("author"));
-			book.setType(request.getParameter("opttype").equalsIgnoreCase("paper") ? BookType.PAPER : BookType.EBOOK);
-			book.setImageUrl(request.getParameter("imageurl"));
-			book.setDescription(request.getParameter("description"));
-			book.setLanguage(request.getParameter("select-language"));
+			book.setTitle(request.getParameter(TITLE));
+			book.setAuthor(request.getParameter(AUTHOR));
+			book.setType(request.getParameter(TYPE).equalsIgnoreCase(PAPER) ? BookType.PAPER : BookType.EBOOK);
+			book.setImageUrl(request.getParameter(IMAGE_URL));
+			book.setDescription(request.getParameter(DESCRIPTION));
+			book.setLanguage(request.getParameter(SELECT_LANGUAGE));
 			String errorMsg = null;
 			boolean success = false;
 			try {
 				success = service.addNewBook(book);
 				if (!success) {
 					errorMsg = "Cannot Add this Book.";
-					request.setAttribute(ERROR, true);
 					request.setAttribute(ERROR_MESSAGE, errorMsg);
 					request.getRequestDispatcher("/admin?command=login").forward(request, response);
 				} else {
-					session.setAttribute("isSuccess", true);
 					session.setAttribute(SUCCESS_MESSAGE, "Book Added Successfully");
 					response.sendRedirect(REDIRECT);
 				}
@@ -72,12 +78,12 @@ public class AddNewBookCommand implements Command {
 	}
 
 	private boolean isCompleteForm(HttpServletRequest request) {
-		String title = request.getParameter("title");
-		String author = request.getParameter("author");
-		String imageURL = request.getParameter("imageurl");
-		String language = request.getParameter("select-language");
-		String description = request.getParameter("description");
-		String type = request.getParameter("opttype");
+		String title = request.getParameter(TITLE);
+		String author = request.getParameter(AUTHOR);
+		String imageURL = request.getParameter(IMAGE_URL);
+		String language = request.getParameter(SELECT_LANGUAGE);
+		String description = request.getParameter(DESCRIPTION);
+		String type = request.getParameter(TYPE);
 		if (StringUtils.isNullOrEmpty(title) || StringUtils.isEmptyOrWhitespaceOnly(title)) {
 			return false;
 		}

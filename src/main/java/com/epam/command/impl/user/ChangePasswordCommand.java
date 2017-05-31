@@ -18,6 +18,10 @@ import com.mysql.cj.core.util.StringUtils;
 
 public class ChangePasswordCommand implements Command {
 
+	private static final String QUERY_URL = "queryUrl";
+	private static final String NEW_PASSWORD = "new-password";
+	private static final String PASSWORD = "password";
+	private static final String USER = "user";
 	private static UserService service;
 	private static final String BASE_URL = "/command?";
 	private static final String HOME_PAGE = "/";
@@ -31,10 +35,10 @@ public class ChangePasswordCommand implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		String password = request.getParameter("password");
-		String newPassword = request.getParameter("new-password");
-		String requestUrl = generateURL(request.getParameter("queryUrl"));
+		User user = (User) session.getAttribute(USER);
+		String password = request.getParameter(PASSWORD);
+		String newPassword = request.getParameter(NEW_PASSWORD);
+		String requestUrl = generateURL(request.getParameter(QUERY_URL));
 		System.out.println(requestUrl);
 		if(verify(user, password, newPassword)){
 			try {

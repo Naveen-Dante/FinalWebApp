@@ -17,6 +17,9 @@ import com.epam.service.impl.BookServiceImpl;
 
 public class BookViewCommand implements Command {
 
+	private static final String ES_ES = "es_ES";
+	private static final String EN_US = "en_US";
+	private static final String ENGLISH = "english";
 	private static final String LANGUAGE = "language";
 	private static final String ID = "id";
 	private static final String BOOK_JSP = "WEB-INF/jsp/updateBook.jsp";
@@ -33,7 +36,7 @@ public class BookViewCommand implements Command {
 		String language = request.getParameter(LANGUAGE);
 		int bookId = Integer.parseInt(request.getParameter(ID));
 		try {
-			BookInfo searchedBook = service.getBookInfo(bookId, language == null || language.equalsIgnoreCase("english")? "en_US": "es_ES" );
+			BookInfo searchedBook = service.getBookInfo(bookId, language == null || language.equalsIgnoreCase(ENGLISH)? EN_US: ES_ES );
 			if(searchedBook != null){
 				request.setAttribute(BOOK, searchedBook);
 				request.setAttribute(BOOK_ERROR, false);
