@@ -14,7 +14,6 @@
 	<table class="table table-hover ">
 		<thead>
 			<tr>
-				<th>${book_id }</th>
 				<th>${book_title }</th>
 				<th>${author }</th>
 				<th>${info }</th>
@@ -24,7 +23,6 @@
 		<tbody>
 			<c:forEach items="${books}" var="book">
 				<tr>
-					<td>${book.id}</td>
 					<td>${book.title}</td>
 					<td>${book.author}</td>
 					<td><a href="/command?name=book&id=${book.id}"><button

@@ -19,7 +19,6 @@
 <fmt:message key="locale.cancel" var="cancel" bundle="${bundle }" />
 
 
-<jsp:include page="./sidebar.jsp"></jsp:include>
 <nav class="navbar navbar-default"
 	style="font-color: black; width: 100%" role="navigation">
 	<div class="container-fluid">

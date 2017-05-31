@@ -35,7 +35,7 @@
 	<tbody>
 		<c:forEach items="${allBooks}" var="book">
 			<tr>
-				<td style="">${book.id}</td>
+				<td>${book.id}</td>
 				<td>${book.title}</td>
 				<td>${book.author}</td>
 				<td>${book.language }</td>

@@ -57,11 +57,11 @@
 					<textarea name="description" rows="10" class="form-control" name="description"
 						id="description" disabled>${book.description }</textarea>
 				</div>
-				<input type="hidden" name="id" value="${book.id }"> <input
-					type="hidden" name="language" value="${book.language }">
+				<input type="hidden" name="id" value="${book.id }"> 
+				<input type="hidden" name="language" value="${book.language }">
 				<div class="row">
-					<button type="submit" class="btn btn-success hide pull-left" name="updateBtn">Submit</button>
-					<button type="button" class="btn btn-info pull-left" name="editBookBtn"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
+					<button type="submit" class="btn btn-success hide pull-left" id="updateBtn">Submit</button>
+					<button type="button" class="btn btn-info pull-left" id="editBookBtn"><span class="glyphicon glyphicon-pencil"></span> Edit</button>
 					<a href="/admin?command=remove-book&id=${book.id }&language=${book.language }"><button
 							type="button" class="btn btn-danger pull-right">Delete
 							Book</button></a>
