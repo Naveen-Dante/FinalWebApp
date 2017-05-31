@@ -40,7 +40,9 @@
 				<strong>Success!</strong> <span>"${success_message }"</span>
 			</div>
 		</c:if>
+		<c:if test="${user == null}">
 			<jsp:include page="../templates/books.jsp" />
+		</c:if>
 		<c:if test="${user != null }">
 			<jsp:include page="../templates/userbooks.jsp"></jsp:include>
 		</c:if>

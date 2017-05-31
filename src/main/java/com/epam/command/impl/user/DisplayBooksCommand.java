@@ -47,9 +47,6 @@ public class DisplayBooksCommand implements Command {
 				books = bookService.getAllBooks(language);
 			}
 			if (books != null) {
-				for (UserBook userBook : books) {
-					System.out.println(userBook.toString());
-				}
 				request.setAttribute(BOOKS, books);
 				request.getRequestDispatcher(BOOKS_JSP).forward(request, response);
 			} else {
